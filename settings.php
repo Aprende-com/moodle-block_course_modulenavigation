@@ -137,4 +137,31 @@ if ($ADMIN->fulltree) {
             $choices
         )
     );
+
+    // Option: show restricted course modules
+    $name        = 'block_course_modulenavigation/toggleshowrestricted';
+    $title       = get_string(
+        'toggleshowrestricted',
+        'block_course_modulenavigation'
+    );
+    $description = get_string(
+        'toggleshowrestricted_desc',
+        'block_course_modulenavigation'
+    );
+    $default     = 1;
+    $choices     = [
+        1 => new lang_string('no'),
+        // No.
+        2 => new lang_string('yes')
+        // Yes.
+    ];
+    $settings->add(
+        new admin_setting_configselect(
+            $name,
+            $title,
+            $description,
+            $default,
+            $choices
+        )
+    );
 }

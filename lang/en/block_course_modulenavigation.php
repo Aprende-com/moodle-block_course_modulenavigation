@@ -43,3 +43,7 @@ $string['togglecollapse_desc']                 = 'Choose whether to display all 
 $string['toggletitles']                        = 'Show only titles';
 $string['toggletitles_desc']                   = 'Choose whether to display only titles or titles and content';
 $string['privacy:null_reason']                 = 'The Blog Course Module Navigation block only shows data stored in other locations';
+
+// Post fork
+$string['toggleshowrestricted']                = 'Show restricted';
+$string['toggleshowrestricted_desc']           = 'Choose whether to display restricted course modules or not';
