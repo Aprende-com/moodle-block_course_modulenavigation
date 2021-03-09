@@ -17,7 +17,7 @@
 /**
  * Course contents block generates a table of course contents based on the section descriptions.
  *
- * @package    block_course_modulenavigation
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,14 +29,14 @@ require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/course/format/lib.php');
 
 /**
- * Define the block course modulenavigation.
+ * Define the block course navigation.
  *
- * @package    block_course_modulenavigation
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_course_modulenavigation extends block_base {
+class block_aprende_coursenavigation extends block_base {
 
     /**
      * Initializes the block, called by the constructor.
@@ -44,7 +44,7 @@ class block_course_modulenavigation extends block_base {
     public function init() {
         $this->title = get_string(
                 'pluginname',
-                'block_course_modulenavigation'
+                'block_aprende_coursenavigation'
         );
     }
 
@@ -64,7 +64,7 @@ class block_course_modulenavigation extends block_base {
         } else {
             $this->title = get_string(
                     'config_blocktitle_default',
-                    'block_course_modulenavigation'
+                    'block_aprende_coursenavigation'
             );
         }
     }
@@ -126,7 +126,7 @@ class block_course_modulenavigation extends block_base {
             if (debugging()) {
                 $this->content->text = get_string(
                         'notusingsections',
-                        'block_course_modulenavigation'
+                        'block_aprende_coursenavigation'
                 );
             }
             return $this->content;
@@ -281,7 +281,7 @@ class block_course_modulenavigation extends block_base {
             $thissection->selected = false;
 
             if (get_config(
-                            'block_course_modulenavigation',
+                            'block_aprende_coursenavigation',
                             'toggleclickontitle'
                     ) == 2) {
                 // Display the menu.
@@ -292,7 +292,7 @@ class block_course_modulenavigation extends block_base {
             }
 
             if (get_config(
-                            'block_course_modulenavigation',
+                            'block_aprende_coursenavigation',
                             'togglecollapse'
                     ) == 2) {
                 $thissection->selected = true;
@@ -300,7 +300,7 @@ class block_course_modulenavigation extends block_base {
 
             // Show only titles.
             if (get_config(
-                            'block_course_modulenavigation',
+                            'block_aprende_coursenavigation',
                             'toggletitles'
                     ) == 2) {
                 // Show only titles.
@@ -319,7 +319,7 @@ class block_course_modulenavigation extends block_base {
                 foreach ($modinfo->sections[$i] as $modnumber) {
                     $module = $modinfo->cms[$modnumber];
                     if ((get_config(
-                                            'block_course_modulenavigation',
+                                            'block_aprende_coursenavigation',
                                             'toggleshowlabels'
                                     ) == 1) && ($module->modname == 'label')) {
                         continue;
@@ -331,7 +331,7 @@ class block_course_modulenavigation extends block_base {
 
                     if (!$module->uservisible) {
                         if (get_config(
-                                'block_course_modulenavigation',
+                                'block_aprende_coursenavigation',
                                 'toggleshowrestricted') == 1 ) {
                             continue;
                         }
@@ -444,7 +444,7 @@ class block_course_modulenavigation extends block_base {
         $template->coursename = $course->fullname;
         $template->config = $this->config;
         $renderer = $this->page->get_renderer(
-                'block_course_modulenavigation',
+                'block_aprende_coursenavigation',
                 'nav'
         );
         $this->content->text = $renderer->render_nav($template);

@@ -1,5 +1,5 @@
 <?php
-// This file is part of The Course Module Navigation Block
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,16 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Course navigation version.
- * @package    block_aprende_coursenavigation
- * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
- * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace block_aprende_coursenavigation\tests;
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_aprende_coursenavigation';
-$plugin->version   = 2020061616;
-$plugin->requires  = 2018051700; // Moodle 3.5 and above.
-$plugin->maturity  = MATURITY_BETA;
+/**
+ * File description for block course navigation.
+ *
+ * @package    block_aprende_coursenavigation
+ * @copyright  David OC <davidherzlos@aprende.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class block_aprende_coursenavigation_testcase extends \advanced_testcase {
+    /**
+     * @testdox Given something, expect something
+     * @test
+    */
+    public function test_something() {
+
+        $this->assertEquals(true, true);
+    }
+}

@@ -1,14 +1,16 @@
-# moodle-block_course_modulenavigation
+# moodle-block_aprende_coursenavigation
 
-[![Build Status](https://travis-ci.org/DigiDago/moodle-block_course_modulenavigation/.svg?branch=master)](https://travis-ci.org/DigiDago/moodle-block_course_modulenavigation)
+Note
+====
+This plugin was forked from https://github.com/DigiDago/moodle-course_modulenavigation by http://pimenko.com/
 
 Introduction
 ============
-Course module navigation is a block that show the users a summary (like a table of content) of a course with sections name and a list of all resources and activties (except URL). One objective of this block is to replace classical block navigation in a way to present only the course contents and sections title.
+Course navigation is a block that show the users a summary (like a table of content) of a course with sections name and a list of all resources and activties (except URL). One objective of this block is to replace classical block navigation in a way to present only the course contents and sections title.
 If you click on resources and activites of the menu, you display the page of the resource or activity.
 
-This block use automaticaly names of sections and names of resources and activities. When you use course module navigation, we recommand to use pages to add videos or contents in order to be able to view all resources in the list of the block.
-If you want to display course module navigation on all pages of the course (main, activities, resources), make sure to check permission of the block and display it on "every page".
+This block uses automaticaly names of sections and names of resources and activities. When you use course module navigation, we recommand to use pages to add videos or contents in order to be able to view all resources in the list of the block.
+If you want to display course navigation on all pages of the course (main, activities, resources), make sure to check permission of the block and display it on "every page".
 
 == We add some options. Now you can : ==
 
@@ -29,12 +31,7 @@ If activity completion is used in the course, course navigation block display a 
 == Display Type of the menu ==
 This block has an option to display at choice :
 - Only the active section
-- or all the sections 
-
-Maintainer
-============
-Course module navigation was initialy developed by Bas Brand and was based on an request of Digidago (Clément PRUDHOMME). It is currently maintained by DigiDago.
-
+- or all the sections
 
 Installation
 ============
@@ -66,19 +63,12 @@ Uninstallation
 
 Version Information
 ===================
-See Changes.md.
-
-
-Any Problems, questions, suggestions
-===================
-If you have a problem with this block, suggestions for improvement, drop an email at :
-- Clément PRUDHOMME :  contact@Pimenko.com
-- Github : https://github.com/DigiDago/moodle-course_modulenavigation
+See changelog.md
 
 
 Languages and translation
 ===================
-English and french versions included / versions anglaise et française incluses.
+English and spanish versions included / versiones en inglés y español.
 
 
 Customization
@@ -86,7 +76,6 @@ Customization
 You can easily use .css to customize style of the bloc course module navigation.
 
 
-
 Us
 ==
-@copyright 2018 Pimenko http://pimenko.com/
+@copyright 2021 Aprende Institute. https://aprende.com
