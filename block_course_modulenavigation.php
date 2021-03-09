@@ -358,6 +358,8 @@ class block_course_modulenavigation extends block_base {
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->disabled = 'true';
+                        $thismod->notavailable = 'true';
+                        $thismod->availableinfo = $module->availableinfo;
                     }
 
                     if ($module->modname == 'label') {
