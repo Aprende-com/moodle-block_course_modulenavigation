@@ -59,53 +59,56 @@
     {{#sections}}
         <div class="section section-default">
             <div class="module-navigation-section-heading" role="tab" id="heading{{number}}">
+                <span class="section-heading__subtitle">CURSO 1</span>
                 <div class="section-title">
-                    <ul class="allpagination">
-                        <li class="allsectionnames">
-                            {{#collapse}}
+                    {{#collapse}}
+                        <a href="{{{url}}}">{{{title}}}</a>
+                    {{/collapse}}
+                    {{^collapse}}
+                        {{#onlytitles}}
                             <a href="{{{url}}}">{{{title}}}</a>
-                            {{/collapse}}
-                            {{^collapse}}
-                                {{#onlytitles}}
-                                    <a href="{{{url}}}">{{{title}}}</a>
-                                {{/onlytitles}}
-                                {{^onlytitles}}
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
-                                   aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
-                                {{/onlytitles}}
-                            {{/collapse}}
-                        </li>
-                        {{#collapse}}
-                            <li class="arrowaccordion">
-                                {{#hasmodules}}
-                                    <a class="expand-arrow" role="button" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse{{number}}" aria-expanded="true"
-                                       aria-controls="collapse{{number}}">
-                                    </a>
-                                {{/hasmodules}}
-                            </li>
-                        {{/collapse}}
-                    </ul>
+                        {{/onlytitles}}
+                        {{^onlytitles}}
+                            <div class="section-title__icon">
+                                {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                            </div>
+                            <div class="section-title__link">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}" aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
+                            </div>
+                        {{/onlytitles}}
+                    {{/collapse}}
                 </div>
             </div>
-            <div id="collapse{{number}}" class="section-collapse collapse {{#selected}}show{{/selected}}"
-                 role="tabsection" aria-labelledby="heading{{number}}">
+
+            <!-- This is the collapse -->
+            <div id="collapse{{number}}" class="section-collapse collapse {{#selected}}show{{/selected}}" role="tabsection" aria-labelledby="heading{{number}}">
                 <div class="section-body">
                     <ul class="activities">
                         {{#modules}}
                             {{^onlytitles}}
                                 <li>
-                                    <a {{^disabled}}href="{{{url}}}"{{/disabled}} class="{{active}} {{#label}}modulenavigationlabel{{/label}}" {{^disabled}}onclick="{{{onclick}}}"{{/disabled}}>
-                                        {{#completionon}}
-                                            <div class="completionbox">
-                                                <div class="completioncheck {{completeclass}}">
-                                                </div>
+                                    <div class="activity-title__icon">
+                                        {{#available}}
+                                            {{#completionon}}
+                                                {{#completed}}
+                                                    {{#pix}}i/completion-auto-pass, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                {{/completed}}
+                                                {{^completed}}
+                                                    {{#pix}}i/completion-auto-n, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                {{/completed}}
+                                            {{/completionon}}
+                                        {{/available}}
+                                        {{^available}}
+                                            {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                        {{/available}}
+                                    </div>
+                                    <div class="activity-title__link">
+                                        <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}">
+                                            <div class="activityname">
+                                                {{{name}}}
                                             </div>
-                                        {{/completionon}}
-                                        <div class="activityname">
-                                            {{{name}}}
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </li>
                             {{/onlytitles}}
                         {{/modules}}
