@@ -1,280 +1,118 @@
-$section-bg: #fff;
-$section-body-padding: 0;
-$section-padding: 10px 15px;
-$section-border-radius: 0;
+// remove this
+#nav-drawer {
+    width: 360px;
+    padding: 0;
+    > .list-group {
+        display: none;
+    }
+}
 
-//** Border color for elements within sections
-$section-inner-border: #ddd;
-$section-content-bg: #f5f5f5;
+/* Colors */
+$deep-cove: #0B0E41;
+$white: #FFF;
 
-$section-default-text: #333;
-$section-default-color: #ddd;
+/* Fonts */
+$default-section-font: "Collier";
+$default-section-font-size: 17px;
+
 
 .block.block_course_modulenavigation {
-    .content {
-        white-space: normal;
-        padding: 5px;
-        background-color: $section-bg;
+    border: none;
+    .section-group {
+        background: $deep-cove;
+        padding: 10px;
     }
-
-    .pagination,
-    .allpagination {
-        margin: 0;
-        padding: $section-body-padding;
-        width: 100%;
-        display: table;
-    }
-
-    .pagination .prev,
-    .allpagination .prev,
-    .pagination .next,
-    .allpagination .next {
-        width: 10%;
-    }
-
-    .pagination .prev a,
-    .allpagination .prev a,
-    .pagination .next a,
-    .allpagination .next a {
-        background-color: inherit;
-    }
-
-    .pagination .sectionname,
-    .allpagination .sectionname,
-    .pagination .allsectionames,
-    .allpagination .allsectionames {
-        width: 90%;
-        border-radius: $section-border-radius;
-        border: 0;
-    }
-
-    .pagination .expand-arrow,
-    .allpagination .expand-arrow {
-        width: 18px;
-        float: right;
-    }
-
-    .pagination > li,
-    .allpagination > li {
-        display: table-cell;
-    }
-
-    .pagination > li a,
-    .allpagination > li a {
-        padding: $section-body-padding;
-        float: none;
-        display: block;
-        background-color: transparent;
-        border-radius: $section-border-radius;
-        border: 0;
-    }
-
-    ul.activities {
-        margin: 0;
-        padding: $section-body-padding;
-        list-style: none;
-
-        li > a {
-            padding: 5px 10px;
-            border-bottom: 1px solid #eee;
-            display: block;
-
-            &:hover,
-            &.active {
-                text-decoration: none;
-                background-color: #eee;
-            }
-        }
-
-        .completionbox {
-            position: relative;
-            display: table-cell;
-            width: 18px;
-        }
-
-        .activityname {
-            display: table-cell;
-        }
-
-        .completioncheck {
-            position: absolute;
-            top: 50%;
-            margin-top: -5px;
-            content: '';
-            width: 10px;
-            height: 10px;
-            border-radius: 5px;
-            display: inline-block;
-
-            &.incomplete {
-                border: 1px solid #ccc;
-            }
-
-            &.completed {
-                border: 1px solid #5cb85c;
-                background-color: #5cb85c;
-            }
-        }
-
-        .modulenavigationlabel {
-            pointer-events: none;
-            cursor: default;
-            color: black;
-            font-weight: 700;
-        }
-    }
-
+    // Collapsed sections
     .section {
-        margin-bottom: 20px;
-        background-color: $section-bg;
-        border: 1px solid transparent;
-        border-radius: $section-border-radius;
+        padding: 10px;
+        background: $deep-cove;
     }
-
-    .section-body {
-        padding: $section-body-padding;
+    // Expanded section
+    .section:first-child {
+        /* Academy Blue */
+        background: #111457;
+        border-radius: 8px;
+    }
+    > .card-body {
+        padding: 0 !important;
+        & > .card-title {
+            display: none !important;
+        }
+        & > .content {
+            margin: 0 !important;
+        }
     }
 
     .module-navigation-section-heading {
-        padding: $section-padding;
-        border-bottom: 1px solid transparent;
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
-
-        > .dropdown .dropdown-toggle {
-            color: inherit;
-        }
+        position: relative;
     }
+    .section-heading__subtitle {
+        font-family: Source Sans Pro;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
 
-    .tocourse {
-        display: block;
-        padding: $section-padding;
-        background-color: $section-content-bg;
-        border: 1px solid $section-default-color;
-        margin-bottom: 3px;
+        letter-spacing: -0.02em;
+        letter-spacing: 0;
+        text-transform: uppercase;
 
-        &:hover {
-            text-decoration: none;
-        }
+        position: absolute;
+        top: 0;
+        left: 36px;
+        color: $white;
     }
-
-    .onesection .module-navigation-section-heading {
-        padding: $section-body-padding;
+    .section-body .activities {
+        margin: 0;
     }
-
+    .section-title, .section-body .activities > li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
     .section-title {
-        margin-top: 0;
-        margin-bottom: 0;
-        color: inherit;
+        height: 50px;
+    }
 
-        > {
-            a,
-            .small,
-            .small > a {
-                color: inherit;
-            }
+    .section-title__link {
+        > a {
+            color: $white;
+            font-family: $default-section-font;
+            font-size: $default-section-font-size;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 19px;
+        }
+    }
+    .section-title__icon {
+        > img {
+            width: 30px;
+            height: 30px;
         }
     }
 
-    .section-footer {
-        padding: $section-padding;
-        background-color: $section-content-bg;
-        border-top: 1px solid $section-default-color;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
 
-    .section > {
-        .list-group,
-        .section-collapse > .list-group {
-            margin-bottom: 0;
-        }
-
-        .list-group .list-group-item,
-        .section-collapse > .list-group .list-group-item {
-            border-width: 1px 0;
-            border-radius: $section-border-radius;
-        }
-
-        .list-group:first-child .list-group-item:first-child,
-        .section-collapse > .list-group:first-child .list-group-item:first-child {
-            border-top: 0;
-            border-top-right-radius: 0;
-            border-top-left-radius: 0;
-        }
-
-        .list-group:last-child .list-group-item:last-child,
-        .section-collapse > .list-group:last-child .list-group-item:last-child {
-            border-bottom: 0;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .module-navigation-section-heading + .section-collapse > .list-group .list-group-item:first-child {
-            border-top-right-radius: 0;
-            border-top-left-radius: 0;
+    .section-body {
+        .activities > li {
+            list-style: none;
+            height: 32px;
         }
     }
-
-    .module-navigation-section-heading + .list-group .list-group-item:first-child,
-    .list-group + .section-footer {
-        border-top-width: 0;
-    }
-
-    .section-group {
-        margin-bottom: 20px;
-
-        .section {
-            margin-bottom: 0;
-            border-radius: $section-border-radius;
-
-            + .section {
-                margin-top: 5px;
-            }
-        }
-
-        .module-navigation-section-heading {
-            border-bottom: 0;
-
-            + .section-collapse > {
-                .section-body,
-                .list-group {
-                    border-top: 1px solid $section-default-color;
-                }
-            }
-        }
-
-        .section-footer {
-            border-top: 0;
-
-            + .section-collapse .section-body {
-                border-bottom: 1px solid $section-default-color;
-            }
+    .activity-title__icon {
+        > img {
+            width: 25px;
+            height: 25px;
         }
     }
-
-    .section-default {
-        border-color: $section-default-color;
-
-        > {
-            .module-navigation-section-heading {
-                color: #333;
-                background-color: $section-content-bg;
-                border-color: $section-default-color;
-
-                + .section-collapse > .section-body {
-                    border-top-color: $section-default-color;
-                }
-
-                .badge {
-                    color: $section-content-bg;
-                    background-color: #333;
-                }
-            }
-
-            .section-footer + .section-collapse > .section-body {
-                border-bottom-color: $section-default-color;
-            }
+    .activity-title__link {
+        > a{
+            font-family: Source Sans Pro;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 32px;
+            letter-spacing: -0.02em;
+            color: $white;
         }
     }
 }
