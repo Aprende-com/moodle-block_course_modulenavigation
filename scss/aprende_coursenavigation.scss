@@ -12,17 +12,15 @@ $white: #FFF;
 $default-section-font: "Collier";
 $default-section-font-size: 17px;
 
-
 .block.block_aprende_coursenavigation {
     border: none;
     .section-group {
-        background: $deep-cove;
         padding: 10px;
+        background: $deep-cove;
     }
     // Collapsed sections
     .section {
         padding: 10px;
-        background: $deep-cove;
     }
     // Expanded section
     .section:first-child {
@@ -60,6 +58,7 @@ $default-section-font-size: 17px;
         color: $white;
     }
     .section-body .activities {
+        padding-left: 2rem;
         margin: 0;
     }
     .section-title, .section-body .activities > li {
@@ -72,7 +71,7 @@ $default-section-font-size: 17px;
     }
 
     .section-title__link {
-        > a {
+        > a, span {
             color: $white;
             font-family: $default-section-font;
             font-size: $default-section-font-size;
@@ -82,9 +81,20 @@ $default-section-font-size: 17px;
         }
     }
     .section-title__icon {
-        > img {
-            width: 30px;
-            height: 30px;
+        > .availability-info {
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 0;
+            margin-right: 8px;
+            min-width: 30px;
+            min-height: 30px;
+
+            > img {
+                margin: 0;
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 

@@ -24,7 +24,8 @@
 
     Block template for navigation
 
-    The purpose of this template is render a navigation block in course contexts. This template renders all the visible sections in a course.
+    The purpose of this template is render a navigation block in course contexts.
+    This template renders all the visible sections in a course.
 
     Classes required for JS:
     * none
@@ -69,12 +70,27 @@
                             <a href="{{{url}}}">{{{title}}}</a>
                         {{/onlytitles}}
                         {{^onlytitles}}
+                            {{#restricted}}
                             <div class="section-title__icon">
-                                {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                <button type="button" class="availability-info" data-toggle="popover"
+                                        data-container="body" data-placement="bottom" data-content="{{availableinfo}}" data-html="true">
+                                    {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
+                                </button>
                             </div>
                             <div class="section-title__link">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}" aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
+                                <span>{{title}}</span>
                             </div>
+                            {{/restricted}}
+                            {{^restricted}}
+                            <div class="section-title__icon">
+                                <div class="availability-info">
+                                </div>
+                            </div>
+                            <div class="section-title__link">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
+                                   aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
+                            </div>
+                            {{/restricted}}
                         {{/onlytitles}}
                     {{/collapse}}
                 </div>

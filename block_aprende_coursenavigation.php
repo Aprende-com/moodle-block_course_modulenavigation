@@ -244,8 +244,14 @@ class block_aprende_coursenavigation extends block_base {
         }
         foreach ($sections as $section) {
             $i = $section->section;
+
             if (!$section->uservisible) {
-                continue;
+                if (get_config(
+                        'block_aprende_coursenavigation',
+                        'toggleshowrestricted') == 1 ) {
+                    continue;
+                }
+
             }
 
             if (!empty($section->name)) {
@@ -312,6 +318,12 @@ class block_aprende_coursenavigation extends block_base {
 
             if ($i == $selected && !$inactivity) {
                 $thissection->selected = true;
+            }
+
+            // Show the restricted section
+            if (!$section->uservisible) {
+                $thissection->restricted = true;
+                $thissection->availableinfo = $section->availableinfo;
             }
 
             $thissection->modules = [];
