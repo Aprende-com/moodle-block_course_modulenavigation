@@ -73,7 +73,7 @@
                             {{#restricted}}
                             <div class="section-title__icon">
                                 <button type="button" class="availability-info" data-toggle="popover"
-                                        data-container="body" data-placement="bottom" data-content="{{availableinfo}}" data-html="true">
+                                        data-container="body" data-placement="bottom" data-content="Unlock this module completing the previous activities" data-html="true">
                                     {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
                                 </button>
                             </div>
@@ -107,23 +107,33 @@
                                         {{#available}}
                                             {{#completionon}}
                                                 {{#completed}}
-                                                    {{#pix}}i/completion-auto-pass, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                    {{#pix}}i/completion-auto-pass, core, {{#str}}completion-y, block_aprende_coursenavigation{{/str}}{{/pix}}
                                                 {{/completed}}
                                                 {{^completed}}
-                                                    {{#pix}}i/completion-auto-n, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                    {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
                                                 {{/completed}}
                                             {{/completionon}}
                                         {{/available}}
                                         {{^available}}
-                                            {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                            <button type="button" class="availability-info" data-toggle="popover"
+                                                    data-container="body" data-placement="bottom" data-content="Unlock this activity completing the previous ones" data-html="true">
+                                                {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
+                                            </button>
                                         {{/available}}
                                     </div>
                                     <div class="activity-title__link">
-                                        <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}">
+                                        {{#available}}
+                                            <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}">
+                                                <div class="activityname">
+                                                    {{{name}}}
+                                                </div>
+                                            </a>
+                                        {{/available}}
+                                        {{^available}}
                                             <div class="activityname">
                                                 {{{name}}}
                                             </div>
-                                        </a>
+                                        {{/available}}
                                     </div>
                                 </li>
                             {{/onlytitles}}

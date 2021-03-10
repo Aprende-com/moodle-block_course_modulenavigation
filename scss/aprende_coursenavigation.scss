@@ -80,21 +80,18 @@ $default-section-font-size: 17px;
             line-height: 19px;
         }
     }
-    .section-title__icon {
-        > .availability-info {
-            background: none;
-            border: none;
-            padding: 0;
-            margin-left: 0;
-            margin-right: 8px;
-            min-width: 30px;
-            min-height: 30px;
-
-            > img {
-                margin: 0;
-                width: 30px;
-                height: 30px;
-            }
+    .availability-info {
+        background: none;
+        border: none;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 8px;
+        min-width: 30px;
+        min-height: 30px;
+        > img {
+            margin: 0;
+            width: 30px;
+            height: 30px;
         }
     }
 
@@ -107,12 +104,12 @@ $default-section-font-size: 17px;
     }
     .activity-title__icon {
         > img {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
         }
     }
     .activity-title__link {
-        > a{
+        .activityname {
             font-family: Source Sans Pro;
             font-style: normal;
             font-weight: normal;
@@ -120,6 +117,10 @@ $default-section-font-size: 17px;
             line-height: 32px;
             letter-spacing: -0.02em;
             color: $white;
+        }
+        > a:hover {
+            text-decoration: underline;
+            text-decoration-color: $white;
         }
     }
 }

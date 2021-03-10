@@ -52,7 +52,7 @@
     font-style: normal;
     font-weight: normal;
     line-height: 19px; }
-  .block.block_aprende_coursenavigation .section-title__icon > .availability-info {
+  .block.block_aprende_coursenavigation .availability-info {
     background: none;
     border: none;
     padding: 0;
@@ -60,7 +60,7 @@
     margin-right: 8px;
     min-width: 30px;
     min-height: 30px; }
-    .block.block_aprende_coursenavigation .section-title__icon > .availability-info > img {
+    .block.block_aprende_coursenavigation .availability-info > img {
       margin: 0;
       width: 30px;
       height: 30px; }
@@ -68,9 +68,9 @@
     list-style: none;
     height: 32px; }
   .block.block_aprende_coursenavigation .activity-title__icon > img {
-    width: 25px;
-    height: 25px; }
-  .block.block_aprende_coursenavigation .activity-title__link > a {
+    width: 20px;
+    height: 20px; }
+  .block.block_aprende_coursenavigation .activity-title__link .activityname {
     font-family: Source Sans Pro;
     font-style: normal;
     font-weight: normal;
@@ -78,5 +78,8 @@
     line-height: 32px;
     letter-spacing: -0.02em;
     color: #FFF; }
+  .block.block_aprende_coursenavigation .activity-title__link > a:hover {
+    text-decoration: underline;
+    text-decoration-color: #FFF; }
 
 /*# sourceMappingURL=styles.css.map */

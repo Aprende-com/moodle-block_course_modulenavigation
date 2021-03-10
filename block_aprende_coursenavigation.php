@@ -366,12 +366,13 @@ class block_aprende_coursenavigation extends block_base {
                     $thismod->url = $module->url;
                     $thismod->onclick = $module->onclick;
 
-                    if (!$module->available) {
+                    if (!$module->uservisible) {
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->disabled = 'true';
-                        $thismod->notavailable = 'true';
-                        $thismod->availableinfo = $module->availableinfo;
+                        $thismod->conditions = $module->availableinfo;
+                    } else {
+                        $thismod->available = 'true';
                     }
 
                     if ($module->modname == 'label') {
@@ -393,6 +394,7 @@ class block_aprende_coursenavigation extends block_base {
                             $completionok
                     )) {
                         $thismod->completeclass = 'completed';
+                        $thismod->completed = 'true';
                     }
                     $thissection->modules[] = $thismod;
                 }

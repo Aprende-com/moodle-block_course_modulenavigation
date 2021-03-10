@@ -47,3 +47,5 @@ $string['privacy:null_reason']                 = 'The Blog Course Module Navigat
 // Post fork
 $string['toggleshowrestricted']                = 'Show restricted';
 $string['toggleshowrestricted_desc']           = 'Choose whether to display restricted course modules or not';
+$string['completion-n']                        = 'Incomplete';
+$string['completion-y']                        = 'Completed';
