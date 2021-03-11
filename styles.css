@@ -2,6 +2,9 @@
   width: 360px;
   padding: 0; }
 
+#nav-drawer.closed {
+  left: -360px; }
+
 /* Colors */
 /* Fonts */
 .block.block_aprende_coursenavigation {
@@ -66,7 +69,7 @@
       height: 30px; }
   .block.block_aprende_coursenavigation .section-body .activities > li {
     list-style: none;
-    height: 32px; }
+    padding: 8px 0; }
   .block.block_aprende_coursenavigation .activity-title__icon > img {
     width: 20px;
     height: 20px; }
@@ -75,7 +78,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
-    line-height: 32px;
+    line-height: 20px;
     letter-spacing: -0.02em;
     color: #FFF; }
   .block.block_aprende_coursenavigation .activity-title__link > a:hover {

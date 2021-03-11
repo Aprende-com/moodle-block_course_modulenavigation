@@ -63,11 +63,11 @@
                 <span class="section-heading__subtitle">CURSO 1</span>
                 <div class="section-title">
                     {{#collapse}}
-                        <a href="{{{url}}}">{{{title}}}</a>
+                        <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
                     {{/collapse}}
                     {{^collapse}}
                         {{#onlytitles}}
-                            <a href="{{{url}}}">{{{title}}}</a>
+                            <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
                         {{/onlytitles}}
                         {{^onlytitles}}
                             {{#restricted}}
@@ -78,7 +78,8 @@
                                 </button>
                             </div>
                             <div class="section-title__link">
-                                <span>{{title}}</span>
+                                <span title="{{title}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</span>
+
                             </div>
                             {{/restricted}}
                             {{^restricted}}
@@ -88,7 +89,9 @@
                             </div>
                             <div class="section-title__link">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
-                                   aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
+                                   aria-expanded="true" aria-controls="collapse{{number}}">
+                                    {{#shortentext}} 38, {{{title}}}{{/shortentext}}
+                                </a>
                             </div>
                             {{/restricted}}
                         {{/onlytitles}}
@@ -123,15 +126,15 @@
                                     </div>
                                     <div class="activity-title__link">
                                         {{#available}}
-                                            <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}">
+                                            <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}" title="{{name}}">
                                                 <div class="activityname">
-                                                    {{{name}}}
+                                                    {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                                 </div>
                                             </a>
                                         {{/available}}
                                         {{^available}}
-                                            <div class="activityname">
-                                                {{{name}}}
+                                            <div class="activityname" title="{{name}}">
+                                                {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                             </div>
                                         {{/available}}
                                     </div>
