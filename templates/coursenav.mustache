@@ -24,7 +24,8 @@
 
     Block template for navigation
 
-    The purpose of this template is render a navigation block in course contexts. This template renders all the visible sections in a course.
+    The purpose of this template is render a navigation block in course contexts.
+    This template renders all the visible sections in a course.
 
     Classes required for JS:
     * none
@@ -62,19 +63,37 @@
                 <span class="section-heading__subtitle">CURSO 1</span>
                 <div class="section-title">
                     {{#collapse}}
-                        <a href="{{{url}}}">{{{title}}}</a>
+                        <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
                     {{/collapse}}
                     {{^collapse}}
                         {{#onlytitles}}
-                            <a href="{{{url}}}">{{{title}}}</a>
+                            <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
                         {{/onlytitles}}
                         {{^onlytitles}}
+                            {{#restricted}}
                             <div class="section-title__icon">
-                                {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                <button type="button" class="availability-info" data-toggle="popover"
+                                        data-container="body" data-placement="bottom" data-content="Unlock this module completing the previous activities" data-html="true">
+                                    {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
+                                </button>
                             </div>
                             <div class="section-title__link">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}" aria-expanded="true" aria-controls="collapse{{number}}">{{{title}}}</a>
+                                <span title="{{title}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</span>
+
                             </div>
+                            {{/restricted}}
+                            {{^restricted}}
+                            <div class="section-title__icon">
+                                <div class="availability-info">
+                                </div>
+                            </div>
+                            <div class="section-title__link">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
+                                   aria-expanded="true" aria-controls="collapse{{number}}">
+                                    {{#shortentext}} 38, {{{title}}}{{/shortentext}}
+                                </a>
+                            </div>
+                            {{/restricted}}
                         {{/onlytitles}}
                     {{/collapse}}
                 </div>
@@ -91,23 +110,33 @@
                                         {{#available}}
                                             {{#completionon}}
                                                 {{#completed}}
-                                                    {{#pix}}i/completion-auto-pass, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                    {{#pix}}i/completion-auto-pass, core, {{#str}}completion-y, block_aprende_coursenavigation{{/str}}{{/pix}}
                                                 {{/completed}}
                                                 {{^completed}}
-                                                    {{#pix}}i/completion-auto-n, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                                    {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
                                                 {{/completed}}
                                             {{/completionon}}
                                         {{/available}}
                                         {{^available}}
-                                            {{#pix}}i/locked-info, format_aprendetopics, {{#str}}delete{{/str}}{{/pix}}
+                                            <button type="button" class="availability-info" data-toggle="popover"
+                                                    data-container="body" data-placement="bottom" data-content="Unlock this activity completing the previous ones" data-html="true">
+                                                {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
+                                            </button>
                                         {{/available}}
                                     </div>
                                     <div class="activity-title__link">
-                                        <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}">
-                                            <div class="activityname">
-                                                {{{name}}}
+                                        {{#available}}
+                                            <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}" title="{{name}}">
+                                                <div class="activityname">
+                                                    {{#shortentext}} 80, {{{name}}}{{/shortentext}}
+                                                </div>
+                                            </a>
+                                        {{/available}}
+                                        {{^available}}
+                                            <div class="activityname" title="{{name}}">
+                                                {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                             </div>
-                                        </a>
+                                        {{/available}}
                                     </div>
                                 </li>
                             {{/onlytitles}}

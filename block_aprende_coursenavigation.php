@@ -244,8 +244,14 @@ class block_aprende_coursenavigation extends block_base {
         }
         foreach ($sections as $section) {
             $i = $section->section;
+
             if (!$section->uservisible) {
-                continue;
+                if (get_config(
+                        'block_aprende_coursenavigation',
+                        'toggleshowrestricted') == 1 ) {
+                    continue;
+                }
+
             }
 
             if (!empty($section->name)) {
@@ -314,6 +320,12 @@ class block_aprende_coursenavigation extends block_base {
                 $thissection->selected = true;
             }
 
+            // Show the restricted section
+            if (!$section->uservisible) {
+                $thissection->restricted = true;
+                $thissection->availableinfo = $section->availableinfo;
+            }
+
             $thissection->modules = [];
             if (!empty($modinfo->sections[$i])) {
                 foreach ($modinfo->sections[$i] as $modnumber) {
@@ -354,12 +366,13 @@ class block_aprende_coursenavigation extends block_base {
                     $thismod->url = $module->url;
                     $thismod->onclick = $module->onclick;
 
-                    if (!$module->available) {
+                    if (!$module->uservisible) {
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->disabled = 'true';
-                        $thismod->notavailable = 'true';
-                        $thismod->availableinfo = $module->availableinfo;
+                        $thismod->conditions = $module->availableinfo;
+                    } else {
+                        $thismod->available = 'true';
                     }
 
                     if ($module->modname == 'label') {
@@ -381,6 +394,7 @@ class block_aprende_coursenavigation extends block_base {
                             $completionok
                     )) {
                         $thismod->completeclass = 'completed';
+                        $thismod->completed = 'true';
                     }
                     $thissection->modules[] = $thismod;
                 }
