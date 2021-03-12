@@ -466,11 +466,11 @@ class block_aprende_coursenavigation extends block_base {
             $template->inactivity = true;
         }
         $template->coursename = $course->fullname;
-        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
-
-        if (!empty($category)) {
-            $template->coursecategory = $category->get_formatted_name();
-        }
+//        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
+//
+//        if (!empty($category)) {
+//            $template->coursecategory = $category->get_formatted_name();
+//        }
 
         $template->config = $this->config;
         $renderer = $this->page->get_renderer(
