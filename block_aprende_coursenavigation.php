@@ -286,6 +286,10 @@ class block_aprende_coursenavigation extends block_base {
             $thissection->url = $format->get_view_url($section);
             $thissection->selected = false;
 
+            if (strlen($title) >= 40) {
+                $thissection->shouldbeshort = true;
+            }
+
             if (get_config(
                             'block_aprende_coursenavigation',
                             'toggleclickontitle'
@@ -324,6 +328,12 @@ class block_aprende_coursenavigation extends block_base {
             if (!$section->uservisible) {
                 $thissection->restricted = true;
                 $thissection->availableinfo = $section->availableinfo;
+            }
+
+            // Show subtitle section property if exist
+            if (!empty($section->subtitle)) {
+                $thissection->sectionlabel = $section->subtitle;
+                $thissection->sectionlabelicon = $section->subtitle_icon;
             }
 
             $thissection->modules = [];
@@ -456,6 +466,12 @@ class block_aprende_coursenavigation extends block_base {
             $template->inactivity = true;
         }
         $template->coursename = $course->fullname;
+        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
+
+        if (!empty($category)) {
+            $template->coursecategory = $category->get_formatted_name();
+        }
+
         $template->config = $this->config;
         $renderer = $this->page->get_renderer(
                 'block_aprende_coursenavigation',
