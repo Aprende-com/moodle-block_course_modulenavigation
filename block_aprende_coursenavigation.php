@@ -90,7 +90,7 @@ class block_aprende_coursenavigation extends block_base {
      * @throws moodle_exception
      */
     public function get_content() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $USER;
 
         if (!is_null($this->content)) {
             return $this->content;
@@ -344,6 +344,9 @@ class block_aprende_coursenavigation extends block_base {
                                             'block_aprende_coursenavigation',
                                             'toggleshowlabels'
                                     ) == 1) && ($module->modname == 'label')) {
+                        continue;
+                    }
+                    if($course->activities_enabled && in_array($modnumber, explode(",", $course->activitiessection)) && !$this->page->user_is_editing() && $USER->profile['folio'] % 2 === 0) {
                         continue;
                     }
 
