@@ -246,9 +246,9 @@ class block_aprende_coursenavigation extends block_base {
             $i = $section->section;
 
             if (!$section->uservisible) {
-                if (get_config(
+                if (!get_config(
                         'block_aprende_coursenavigation',
-                        'toggleshowrestricted') == 1 ) {
+                        'toggleshowrestricted')) {
                     continue;
                 }
 
@@ -352,9 +352,9 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if (!$module->uservisible) {
-                        if (get_config(
+                        if (!get_config(
                                 'block_aprende_coursenavigation',
-                                'toggleshowrestricted') == 1 ) {
+                                'toggleshowrestricted')) {
                             continue;
                         }
 
