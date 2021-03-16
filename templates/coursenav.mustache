@@ -57,17 +57,35 @@
     }
 }}
 <div class="section-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="course-info">
+        <a href="{{courseurl}}">
+            <h1 class="course-info__title">{{coursename}}</h1>
+        </a>
+        {{#coursecategory}}
+            <span class="course-info__category">{{{.}}}</span>
+        {{/coursecategory}}
+    </div>
     {{#sections}}
         <div class="section section-default">
             <div class="module-navigation-section-heading" role="tab" id="heading{{number}}">
-                <span class="section-heading__subtitle">CURSO 1</span>
                 <div class="section-title">
+                    {{#sectionlabel}}
+                        <span class="section-heading__subtitle">
+                            {{{sectionlabel}}}
+                            <i class="fa {{{sectionlabelicon}}}" aria-hidden="true"></i>
+                        </span>
+
+                    {{/sectionlabel}}
                     {{#collapse}}
-                        <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
+                        <a href="{{{url}}}" title="{{{title}}}">
+                            {{> block_aprende_coursenavigation/coursenav_sectionname }}
+                        </a>
                     {{/collapse}}
                     {{^collapse}}
                         {{#onlytitles}}
-                            <a href="{{{url}}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</a>
+                            <a href="{{{url}}}" title="{{{title}}}">
+                                {{> block_aprende_coursenavigation/coursenav_sectionname }}
+                            </a>
                         {{/onlytitles}}
                         {{^onlytitles}}
                             {{#restricted}}
@@ -78,19 +96,23 @@
                                 </button>
                             </div>
                             <div class="section-title__link">
-                                <span title="{{title}}">{{#shortentext}} 10, {{{title}}}{{/shortentext}}</span>
+                                <span title="{{title}}">
+                                    {{> block_aprende_coursenavigation/coursenav_sectionname }}
+                                </span>
 
                             </div>
                             {{/restricted}}
                             {{^restricted}}
                             <div class="section-title__icon">
-                                <div class="availability-info">
-                                </div>
+                                <button type="button" class="availability-info" data-toggle="popover"
+                                        data-container="body" data-placement="bottom" data-content="Continue your course from here" data-html="true">
+                                    {{#pix}}i/continue, block_aprende_coursenavigation{{/pix}}
+                                </button>
                             </div>
                             <div class="section-title__link">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
-                                   aria-expanded="true" aria-controls="collapse{{number}}">
-                                    {{#shortentext}} 38, {{{title}}}{{/shortentext}}
+                                   aria-expanded="true" aria-controls="collapse{{number}}" title="{{{title}}}">
+                                    {{> block_aprende_coursenavigation/coursenav_sectionname }}
                                 </a>
                             </div>
                             {{/restricted}}
@@ -131,6 +153,12 @@
                                                     {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                                 </div>
                                             </a>
+                                            {{#optional}}
+                                                <span class="badge badge-light optional-badge" data-toggle="tooltip" data-placement="bottom" data-title="It is not neccesary to graduate, but we recommend it">
+                                                    Optional
+                                                    {{#pix}}docs, core{{/pix}}
+                                                </span>
+                                            {{/optional}}
                                         {{/available}}
                                         {{^available}}
                                             <div class="activityname" title="{{name}}">

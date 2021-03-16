@@ -148,20 +148,16 @@ if ($ADMIN->fulltree) {
         'toggleshowrestricted_desc',
         'block_aprende_coursenavigation'
     );
-    $default     = 1;
-    $choices     = [
-        1 => new lang_string('no'),
-        // No.
-        2 => new lang_string('yes')
-        // Yes.
-    ];
+    $default     = false;
+
     $settings->add(
-        new admin_setting_configselect(
+        new admin_setting_configcheckbox_with_advanced(
             $name,
             $title,
             $description,
             $default,
-            $choices
+            true,
+            false
         )
     );
 }

@@ -246,9 +246,9 @@ class block_aprende_coursenavigation extends block_base {
             $i = $section->section;
 
             if (!$section->uservisible) {
-                if (get_config(
+                if (!get_config(
                         'block_aprende_coursenavigation',
-                        'toggleshowrestricted') == 1 ) {
+                        'toggleshowrestricted')) {
                     continue;
                 }
 
@@ -285,6 +285,10 @@ class block_aprende_coursenavigation extends block_base {
             $thissection->title = $title;
             $thissection->url = $format->get_view_url($section);
             $thissection->selected = false;
+
+            if (strlen($title) >= 40) {
+                $thissection->shouldbeshort = true;
+            }
 
             if (get_config(
                             'block_aprende_coursenavigation',
@@ -326,6 +330,12 @@ class block_aprende_coursenavigation extends block_base {
                 $thissection->availableinfo = $section->availableinfo;
             }
 
+            // Show subtitle section property if exist
+            if (!empty($section->subtitle)) {
+                $thissection->sectionlabel = $section->subtitle;
+                $thissection->sectionlabelicon = $section->subtitle_icon;
+            }
+
             $thissection->modules = [];
             if (!empty($modinfo->sections[$i])) {
                 foreach ($modinfo->sections[$i] as $modnumber) {
@@ -342,9 +352,9 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if (!$module->uservisible) {
-                        if (get_config(
+                        if (!get_config(
                                 'block_aprende_coursenavigation',
-                                'toggleshowrestricted') == 1 ) {
+                                'toggleshowrestricted')) {
                             continue;
                         }
 
@@ -380,6 +390,16 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->onclick = '';
                         $thismod->label = 'true';
                     }
+
+                    $statusclass = '\format_aprendetopics\status';
+
+                    if ($module->uservisible && class_exists($statusclass)) {
+                        $status = new $statusclass($module->id);
+                        if ($status->optional) {
+                            $thismod->optional = true;
+                        }
+                    }
+
                     $hascompletion = $completioninfo->is_enabled($module);
                     if ($hascompletion) {
                         $thismod->completeclass = 'incomplete';
@@ -456,6 +476,12 @@ class block_aprende_coursenavigation extends block_base {
             $template->inactivity = true;
         }
         $template->coursename = $course->fullname;
+//        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
+//
+//        if (!empty($category)) {
+//            $template->coursecategory = $category->get_formatted_name();
+//        }
+
         $template->config = $this->config;
         $renderer = $this->page->get_renderer(
                 'block_aprende_coursenavigation',

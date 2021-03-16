@@ -1,26 +1,50 @@
 /* Colors */
-$deep-cove: #0B0E41;
 $white: #FFF;
+$deep-cove: #0B0E41;
+$flama-red: #FC1244;
+$dark-gray: #718096;
+$dark-gray-border: #4D529F;
 
 /* Fonts */
 $default-section-font: "Collier";
-$default-section-font-size: 17px;
+$default-section-font-size: 18px;
 
 .block.block_aprende_coursenavigation {
     border: none;
+    border-top: 1px solid $dark-gray-border;
+
+    .course-info {
+        padding: 28px 24px;
+        .course-info__title {
+            font-family: Collier;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 32px;
+            line-height: 36px;
+            /* identical to box height */
+            color: $white;
+            margin: 0;
+        }
+        .course-info__category {
+            font-family: Source Sans Pro;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 16px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+
+            /* White */
+            color: $white;
+        }
+    }
     .section-group {
-        padding: 10px;
         background: $deep-cove;
     }
     // Collapsed sections
     .section {
-        padding: 10px;
-    }
-    // Expanded section
-    .section:first-child {
-        /* Academy Blue */
-        background: #111457;
-        border-radius: 8px;
+        border-bottom: 1px solid #252b65;
+        padding: 30px 0 12px 0;
     }
     > .card-body {
         padding: 0 !important;
@@ -34,6 +58,7 @@ $default-section-font-size: 17px;
 
     .module-navigation-section-heading {
         position: relative;
+        padding-right: 8px;
     }
     .section-heading__subtitle {
         font-family: Source Sans Pro;
@@ -41,18 +66,20 @@ $default-section-font-size: 17px;
         font-weight: 600;
         font-size: 12px;
         line-height: 18px;
-
         letter-spacing: -0.02em;
         letter-spacing: 0;
         text-transform: uppercase;
 
-        position: absolute;
-        top: 0;
-        left: 36px;
         color: $white;
+        position: absolute;
+        top: -16px;
+        left: 32px;
+        > i {
+            color: $flama-red;
+        }
     }
     .section-body .activities {
-        padding-left: 2rem;
+        padding: 8px 24px 8px 40px;
         margin: 0;
     }
     .section-title, .section-body .activities > li {
@@ -60,11 +87,12 @@ $default-section-font-size: 17px;
         justify-content: flex-start;
         align-items: center;
     }
-    .section-title {
-        height: 50px;
+    .section-title__icon {
+        transform: translateY(-2px);
     }
 
     .section-title__link {
+        margin-left: 4px;
         > a, span {
             color: $white;
             font-family: $default-section-font;
@@ -79,30 +107,31 @@ $default-section-font-size: 17px;
         border: none;
         padding: 0;
         margin-left: 0;
-        margin-right: 8px;
         min-width: 30px;
         min-height: 30px;
         > img {
             margin: 0;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
         }
     }
-
-
     .section-body {
         .activities > li {
+            position: relative;
             list-style: none;
-            padding: 8px 0;
+            padding: 10px 0;
         }
     }
     .activity-title__icon {
+        transform: translateX(-6px);
         > img {
             width: 20px;
             height: 20px;
+
         }
     }
     .activity-title__link {
+
         .activityname {
             font-family: Source Sans Pro;
             font-style: normal;
@@ -115,6 +144,20 @@ $default-section-font-size: 17px;
         > a:hover {
             text-decoration: underline;
             text-decoration-color: $white;
+        }
+        > .optional-badge {
+            background: #F6F6F9;
+            border-radius: 4px;
+            font-size: 9px;
+            color: #718096;
+            padding: 2px 4px;
+            position: absolute;
+            bottom: 11px;
+            right: 0;
+            > .icon {
+                cursor: pointer;
+                margin: 0;
+            }
         }
     }
 }
