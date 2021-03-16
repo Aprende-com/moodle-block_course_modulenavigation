@@ -61,7 +61,9 @@
         <a href="{{courseurl}}">
             <h1 class="course-info__title">{{coursename}}</h1>
         </a>
-        <span class="course-info__category">{{{coursecategory}}}</span>
+        {{#coursecategory}}
+            <span class="course-info__category">{{{.}}}</span>
+        {{/coursecategory}}
     </div>
     {{#sections}}
         <div class="section section-default">
@@ -151,6 +153,12 @@
                                                     {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                                 </div>
                                             </a>
+                                            {{#optional}}
+                                                <span class="badge badge-light optional-badge" data-toggle="tooltip" data-placement="bottom" data-title="It is not neccesary to graduate, but we recommend it">
+                                                    Optional
+                                                    {{#pix}}docs, core{{/pix}}
+                                                </span>
+                                            {{/optional}}
                                         {{/available}}
                                         {{^available}}
                                             <div class="activityname" title="{{name}}">

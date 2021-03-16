@@ -390,6 +390,16 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->onclick = '';
                         $thismod->label = 'true';
                     }
+
+                    $statusclass = '\format_aprendetopics\status';
+
+                    if ($module->uservisible && class_exists($statusclass)) {
+                        $status = new $statusclass($module->id);
+                        if ($status->optional) {
+                            $thismod->optional = true;
+                        }
+                    }
+
                     $hascompletion = $completioninfo->is_enabled($module);
                     if ($hascompletion) {
                         $thismod->completeclass = 'incomplete';

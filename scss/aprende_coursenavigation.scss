@@ -3,16 +3,16 @@ $white: #FFF;
 $deep-cove: #0B0E41;
 $flama-red: #FC1244;
 $dark-gray: #718096;
+$dark-gray-border: #4D529F;
 
 /* Fonts */
 $default-section-font: "Collier";
 $default-section-font-size: 18px;
 
-#nav-drawer {
-    background: $deep-cove;
-}
-
 .block.block_aprende_coursenavigation {
+    border: none;
+    border-top: 1px solid $dark-gray-border;
+
     .course-info {
         padding: 28px 24px;
         .course-info__title {
@@ -38,7 +38,6 @@ $default-section-font-size: 18px;
             color: $white;
         }
     }
-    border: none;
     .section-group {
         background: $deep-cove;
     }
@@ -86,7 +85,7 @@ $default-section-font-size: 18px;
     .section-title, .section-body .activities > li {
         display: flex;
         justify-content: flex-start;
-        align-items: baseline;
+        align-items: center;
     }
     .section-title__icon {
         transform: translateY(-2px);
@@ -118,6 +117,7 @@ $default-section-font-size: 18px;
     }
     .section-body {
         .activities > li {
+            position: relative;
             list-style: none;
             padding: 10px 0;
         }
@@ -131,6 +131,7 @@ $default-section-font-size: 18px;
         }
     }
     .activity-title__link {
+
         .activityname {
             font-family: Source Sans Pro;
             font-style: normal;
@@ -143,6 +144,20 @@ $default-section-font-size: 18px;
         > a:hover {
             text-decoration: underline;
             text-decoration-color: $white;
+        }
+        > .optional-badge {
+            background: #F6F6F9;
+            border-radius: 4px;
+            font-size: 9px;
+            color: #718096;
+            padding: 2px 4px;
+            position: absolute;
+            bottom: 11px;
+            right: 0;
+            > .icon {
+                cursor: pointer;
+                margin: 0;
+            }
         }
     }
 }
