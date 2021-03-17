@@ -399,8 +399,6 @@ class block_aprende_coursenavigation extends block_base {
                             continue;
                         }
 
-                        print_object($titlematch);
-
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->label = 'true';
