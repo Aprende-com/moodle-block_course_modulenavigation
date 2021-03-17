@@ -392,12 +392,14 @@ class block_aprende_coursenavigation extends block_base {
 
                     if ($module->modname == 'label') {
                         // TODO: Confirm the title class on the standp up
-                        $htmltitleregexp = '/<h[1-6] class="content-separaror">(?<titletext>.+?)<\/h[1-6]>/iu';
+                        $htmltitleregexp = '/<h[1-6] class="content-separator">(?<titletext>.+?)<\/h[1-6]>/iu';
 
                         $titlematch = [];
-                        if (!preg_match($htmltitleregexp, $module->content, $titlematch)) {
+                        if (!preg_match($htmltitleregexp, str_replace(array("\r","\n"),"",$module->content), $titlematch)) {
                             continue;
                         }
+
+                        print_object($titlematch);
 
                         $thismod->url = '';
                         $thismod->onclick = '';
