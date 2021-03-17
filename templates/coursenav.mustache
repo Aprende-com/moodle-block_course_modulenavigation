@@ -128,6 +128,7 @@
                         {{#modules}}
                             {{^onlytitles}}
                                 <li>
+                                    {{^label}}
                                     <div class="activity-title__icon">
                                         {{#available}}
                                             {{#completionon}}
@@ -166,6 +167,14 @@
                                             </div>
                                         {{/available}}
                                     </div>
+                                    {{/label}}
+                                    {{#label}}
+                                        <div class="content-separator" title="{{name}}">
+                                            <h6 class="title">
+                                                {{#shortentext}} 80, {{{name}}}{{/shortentext}}
+                                            </h6>
+                                        </div>
+                                    {{/label}}
                                 </li>
                             {{/onlytitles}}
                         {{/modules}}

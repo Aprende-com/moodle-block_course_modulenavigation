@@ -114,5 +114,13 @@
     .block.block_aprende_coursenavigation .activity-title__link > .optional-badge > .icon {
       cursor: pointer;
       margin: 0; }
+  .block.block_aprende_coursenavigation .content-separator .title {
+    font-family: Collier;
+    color: #FC1244;
+    font-weight: 400;
+    font-size: 20px;
+    border-left: 3px solid #fc1244;
+    padding: 1px 6px;
+    transform: translateX(-4px); }
 
 /*# sourceMappingURL=styles.css.map */

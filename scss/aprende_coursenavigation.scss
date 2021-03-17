@@ -160,4 +160,15 @@ $default-section-font-size: 18px;
             }
         }
     }
+    .content-separator {
+        .title {
+            font-family: Collier;
+            color: #FC1244;
+            font-weight: 400;
+            font-size: 20px;
+            border-left: 3px solid #fc1244;
+            padding: 1px 6px;
+            transform: translateX(-4px);
+        }
+    }
 }
