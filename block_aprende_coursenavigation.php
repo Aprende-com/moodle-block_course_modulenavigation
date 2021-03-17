@@ -345,7 +345,8 @@ class block_aprende_coursenavigation extends block_base {
                         continue;
                     }
 
-                    if($course->activities_enabled &&
+                    if(isset($course->activities_enabled) &&
+                        $course->activities_enabled &&
                         in_array($modnumber, explode(",", $course->activitiessection)) &&
                         !$this->page->user_is_editing() &&
                         $USER->profile['folio'] % 2 === 0) {
