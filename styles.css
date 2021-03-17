@@ -2,7 +2,10 @@
 /* Fonts */
 .block.block_aprende_coursenavigation {
   border: none;
-  border-top: 1px solid #4D529F; }
+  border-top: 1px solid #4D529F;
+  margin: 0 !important; }
+  .block.block_aprende_coursenavigation > .card-body {
+    background: #0B0E41; }
   .block.block_aprende_coursenavigation .course-info {
     padding: 28px 24px; }
     .block.block_aprende_coursenavigation .course-info .course-info__title {
@@ -28,7 +31,12 @@
     background: #0B0E41; }
   .block.block_aprende_coursenavigation .section {
     border-bottom: 1px solid #252b65;
-    padding: 30px 0 12px 0; }
+    padding: 30px 0 12px 0;
+    margin: 10px; }
+    .block.block_aprende_coursenavigation .section.current {
+      background: #111457;
+      border-radius: 8px;
+      border: none; }
   .block.block_aprende_coursenavigation > .card-body {
     padding: 0 !important; }
     .block.block_aprende_coursenavigation > .card-body > .card-title {

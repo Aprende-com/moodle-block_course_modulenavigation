@@ -66,7 +66,7 @@
         {{/coursecategory}}
     </div>
     {{#sections}}
-        <div class="section section-default">
+        <div class="section section-default {{#selected}}current{{/selected}}">
             <div class="module-navigation-section-heading" role="tab" id="heading{{number}}">
                 <div class="section-title">
                     {{#sectionlabel}}
@@ -184,3 +184,8 @@
         </div>
     {{/sections}}
 </div>
+{{#js}}
+require(['block_aprende_coursenavigation/expanded-section'], function(sections) {
+    sections.init(".block_aprende_coursenavigation .section-group");
+});
+{{/js}}
