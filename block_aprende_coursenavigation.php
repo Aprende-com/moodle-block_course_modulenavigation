@@ -90,7 +90,7 @@ class block_aprende_coursenavigation extends block_base {
      * @throws moodle_exception
      */
     public function get_content() {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $USER;
 
         if (!is_null($this->content)) {
             return $this->content;
@@ -331,7 +331,7 @@ class block_aprende_coursenavigation extends block_base {
             }
 
             // Show subtitle section property if exist
-            if (!empty($section->subtitle)) {
+            if (isset($section->subtitle) && isset($section->subtitle_icon)) {
                 $thissection->sectionlabel = $section->subtitle;
                 $thissection->sectionlabelicon = $section->subtitle_icon;
             }
@@ -340,10 +340,16 @@ class block_aprende_coursenavigation extends block_base {
             if (!empty($modinfo->sections[$i])) {
                 foreach ($modinfo->sections[$i] as $modnumber) {
                     $module = $modinfo->cms[$modnumber];
-                    if ((get_config(
-                                            'block_aprende_coursenavigation',
-                                            'toggleshowlabels'
-                                    ) == 1) && ($module->modname == 'label')) {
+                    if ((get_config('block_aprende_coursenavigation', 'toggleshowlabels') == 1) &&
+                        ($module->modname == 'label')) {
+                        continue;
+                    }
+
+                    if(isset($course->activities_enabled) &&
+                        $course->activities_enabled &&
+                        in_array($modnumber, explode(",", $course->activitiessection)) &&
+                        !$this->page->user_is_editing() &&
+                        $USER->profile['folio'] % 2 === 0) {
                         continue;
                     }
 
@@ -386,13 +392,21 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if ($module->modname == 'label') {
+                        // TODO: Confirm the title class on the standp up
+                        $htmltitleregexp = '/<h[1-6] class="content-separator">(?<titletext>.+?)<\/h[1-6]>/iu';
+
+                        $titlematch = [];
+                        if (!preg_match($htmltitleregexp, str_replace(array("\r","\n"),"",$module->content), $titlematch)) {
+                            continue;
+                        }
+
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->label = 'true';
+                        $thismod->labelcontent = htmlspecialchars_decode($titlematch['titletext']);
                     }
 
                     $statusclass = '\format_aprendetopics\status';
-
                     if ($module->uservisible && class_exists($statusclass)) {
                         $status = new $statusclass($module->id);
                         if ($status->optional) {
@@ -476,11 +490,11 @@ class block_aprende_coursenavigation extends block_base {
             $template->inactivity = true;
         }
         $template->coursename = $course->fullname;
-//        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
-//
-//        if (!empty($category)) {
-//            $template->coursecategory = $category->get_formatted_name();
-//        }
+        $category = core_course_category::get($course->category, IGNORE_MISSING, true);
+
+        if (!is_null($category)) {
+            $template->coursecategory = $category->get_formatted_name();
+        }
 
         $template->config = $this->config;
         $renderer = $this->page->get_renderer(

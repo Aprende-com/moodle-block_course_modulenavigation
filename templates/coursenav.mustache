@@ -66,7 +66,7 @@
         {{/coursecategory}}
     </div>
     {{#sections}}
-        <div class="section section-default">
+        <div class="section section-default {{#selected}}current{{/selected}}">
             <div class="module-navigation-section-heading" role="tab" id="heading{{number}}">
                 <div class="section-title">
                     {{#sectionlabel}}
@@ -128,6 +128,7 @@
                         {{#modules}}
                             {{^onlytitles}}
                                 <li>
+                                    {{^label}}
                                     <div class="activity-title__icon">
                                         {{#available}}
                                             {{#completionon}}
@@ -166,6 +167,14 @@
                                             </div>
                                         {{/available}}
                                     </div>
+                                    {{/label}}
+                                    {{#label}}
+                                        <div class="content-separator" title="{{labelcontent}}">
+                                            <h6 class="title">
+                                                {{#shortentext}} 80, {{labelcontent}}{{/shortentext}}
+                                            </h6>
+                                        </div>
+                                    {{/label}}
                                 </li>
                             {{/onlytitles}}
                         {{/modules}}
@@ -175,3 +184,8 @@
         </div>
     {{/sections}}
 </div>
+{{#js}}
+require(['block_aprende_coursenavigation/expanded-section'], function(sections) {
+    sections.init(".block_aprende_coursenavigation .section-group");
+});
+{{/js}}
