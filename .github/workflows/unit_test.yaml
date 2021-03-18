@@ -21,7 +21,7 @@ jobs:
           DATE=`date '+%Y%m%d%H%M%S'` 
           PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
           PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
-          IMAGE=$(kubectl describe deployment moodle -n qa| grep Image | awk '{print $2}') 
+          IMAGE=$(kubectl describe deployment moodle -n master| grep Image | awk '{print $2}') 
           cd /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cp /home/ubuntu/tools/coverage/php.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cp /home/ubuntu/tools/coverage/20-xdebug.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
