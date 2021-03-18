@@ -124,10 +124,7 @@ class block_aprende_coursenavigation extends block_base {
 
         if (!$format->uses_sections()) {
             if (debugging()) {
-                $this->content->text = get_string(
-                        'notusingsections',
-                        'block_aprende_coursenavigation'
-                );
+                $this->content->text = '';
             }
             return $this->content;
         }
