@@ -155,7 +155,7 @@ class block_aprende_coursenavigation extends block_base {
         $completioninfo = new completion_info($course);
 
         if ($completioninfo->is_enabled()) {
-            $template->completionon = 'completion';
+            $template->coursecompletionon = 'completion';
         }
 
         $completionok = [
@@ -417,7 +417,7 @@ class block_aprende_coursenavigation extends block_base {
 
                     $hascompletion = $completioninfo->is_enabled($module);
                     if ($hascompletion) {
-                        $thismod->completeclass = 'incomplete';
+                        $thismod->completionon = true;
                     }
 
                     $completiondata = $completioninfo->get_data(

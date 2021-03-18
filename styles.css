@@ -37,6 +37,13 @@
       background: #111457;
       border-radius: 8px;
       border: none; }
+    .block.block_aprende_coursenavigation .section .availability-info {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 0;
+      min-width: 30px;
+      min-height: 30px; }
   .block.block_aprende_coursenavigation > .card-body {
     padding: 0 !important; }
     .block.block_aprende_coursenavigation > .card-body > .card-title {
@@ -64,6 +71,10 @@
   .block.block_aprende_coursenavigation .section-body .activities {
     padding: 8px 8px 8px 40px;
     margin: 0; }
+  .block.block_aprende_coursenavigation .section-title .availability-info > img {
+    margin: 0;
+    width: 25px;
+    height: 25px; }
   .block.block_aprende_coursenavigation .section-title, .block.block_aprende_coursenavigation .section-body .activities > li {
     display: flex;
     justify-content: flex-start;
@@ -79,23 +90,18 @@
       font-style: normal;
       font-weight: normal;
       line-height: 19px; }
-  .block.block_aprende_coursenavigation .availability-info {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: 0;
-    min-width: 30px;
-    min-height: 30px; }
-    .block.block_aprende_coursenavigation .availability-info > img {
-      margin: 0;
-      width: 25px;
-      height: 25px; }
   .block.block_aprende_coursenavigation .section-body .activities > li {
     position: relative;
     list-style: none;
     padding: 10px 0; }
+    .block.block_aprende_coursenavigation .section-body .activities > li .availability-info > img {
+      margin: 0;
+      width: 28px;
+      height: 28px;
+      transform: translate(-7px); }
   .block.block_aprende_coursenavigation .activity-title__icon {
-    transform: translateX(-6px); }
+    transform: translateX(-6px);
+    min-width: 26px; }
     .block.block_aprende_coursenavigation .activity-title__icon > img {
       width: 20px;
       height: 20px; }

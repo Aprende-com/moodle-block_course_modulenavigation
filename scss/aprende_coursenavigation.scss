@@ -55,6 +55,14 @@ $default-section-font-size: 18px;
             border-radius: 8px;
             border: none;
         }
+        .availability-info {
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 0;
+            min-width: 30px;
+            min-height: 30px;
+        }
     }
     > .card-body {
         padding: 0 !important;
@@ -92,6 +100,15 @@ $default-section-font-size: 18px;
         padding: 8px 8px 8px 40px;
         margin: 0;
     }
+    .section-title {
+        .availability-info {
+            > img {
+                margin: 0;
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
     .section-title, .section-body .activities > li {
         display: flex;
         justify-content: flex-start;
@@ -112,28 +129,24 @@ $default-section-font-size: 18px;
             line-height: 19px;
         }
     }
-    .availability-info {
-        background: none;
-        border: none;
-        padding: 0;
-        margin-left: 0;
-        min-width: 30px;
-        min-height: 30px;
-        > img {
-            margin: 0;
-            width: 25px;
-            height: 25px;
-        }
-    }
     .section-body {
         .activities > li {
             position: relative;
             list-style: none;
             padding: 10px 0;
+            .availability-info {
+                > img {
+                    margin: 0;
+                    width: 28px;
+                    height: 28px;
+                    transform: translate(-7px);
+                }
+            }
         }
     }
     .activity-title__icon {
         transform: translateX(-6px);
+        min-width: 26px;
         > img {
             width: 20px;
             height: 20px;
