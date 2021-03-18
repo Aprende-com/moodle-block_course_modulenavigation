@@ -91,7 +91,7 @@
                             {{#restricted}}
                             <div class="section-title__icon">
                                 <button type="button" class="availability-info" data-toggle="popover"
-                                        data-container="body" data-placement="bottom" data-content="Unlock this module completing the previous activities" data-html="true">
+                                        data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
                                     {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
                                 </button>
                             </div>
@@ -142,7 +142,7 @@
                                         {{/available}}
                                         {{^available}}
                                             <button type="button" class="availability-info" data-toggle="popover"
-                                                    data-container="body" data-placement="bottom" data-content="Unlock this activity completing the previous ones" data-html="true">
+                                                    data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
                                                 {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
                                             </button>
                                         {{/available}}
