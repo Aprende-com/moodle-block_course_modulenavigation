@@ -303,8 +303,10 @@ class block_aprende_coursenavigation extends block_base {
             $thissection->url = $format->get_view_url($section);
             $thissection->selected = false;
 
-            if ($section == $lastsection) {
-                $thissection->lastviewed = true;
+            if (isset($lastsection)) {
+                if ($section == $lastsection) {
+                    $thissection->lastviewed = true;
+                }
             }
 
             if (strlen($title) >= 40) {
