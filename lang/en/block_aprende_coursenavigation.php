@@ -49,3 +49,5 @@ $string['toggleshowrestricted']                = 'Show restricted';
 $string['toggleshowrestricted_desc']           = 'Choose whether to display restricted course modules or not';
 $string['completion-n']                        = 'Incomplete';
 $string['completion-y']                        = 'Completed';
+$string['optional']                            = 'Optional';
+$string['optionalmsg']                         = 'This item is not neccesary to graduate, but we encourage you to complete it';

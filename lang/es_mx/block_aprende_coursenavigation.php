@@ -49,3 +49,5 @@ $string['toggleshowrestricted']                = 'Mostrar elementos restringidos
 $string['toggleshowrestricted_desc']           = 'Activa para mostrar secciones y actividades restringidas como parte de la navegación';
 $string['completion-n']                        = 'No finalizado';
 $string['completion-y']                        = 'Finalizado';
+$string['optional']                            = 'Opcional';
+$string['optionalmsg']                         = 'Esta actividad no es requerida para graduarse, pero te la recomendamos ampliamente.';

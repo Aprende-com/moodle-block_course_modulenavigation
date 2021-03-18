@@ -91,7 +91,7 @@
                             {{#restricted}}
                             <div class="section-title__icon">
                                 <button type="button" class="availability-info" data-toggle="popover"
-                                        data-container="body" data-placement="bottom" data-content="Unlock this module completing the previous activities" data-html="true">
+                                        data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
                                     {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
                                 </button>
                             </div>
@@ -142,7 +142,7 @@
                                         {{/available}}
                                         {{^available}}
                                             <button type="button" class="availability-info" data-toggle="popover"
-                                                    data-container="body" data-placement="bottom" data-content="Unlock this activity completing the previous ones" data-html="true">
+                                                    data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
                                                 {{#pix}}i/locked-info, format_aprendetopics{{/pix}}
                                             </button>
                                         {{/available}}
@@ -150,12 +150,12 @@
                                     <div class="activity-title__link">
                                         {{#available}}
                                             <a href="{{{url}}}" class="{{active}} {{#label}}modulenavigationlabel{{/label}}" onclick="{{{onclick}}}" title="{{name}}">
-                                                <div class="activityname">
+                                                <div class="activityname {{#optional}}{{#str}}optional, block_aprende_coursenavigation{{/str}}{{/optional}}">
                                                     {{#shortentext}} 80, {{{name}}}{{/shortentext}}
                                                 </div>
                                             </a>
                                             {{#optional}}
-                                                <span class="badge badge-light optional-badge" data-toggle="tooltip" data-placement="bottom" data-title="It is not neccesary to graduate, but we recommend it">
+                                                <span class="badge badge-light optional-badge" data-toggle="tooltip" data-placement="bottom" data-title="{{#str}}optionalmsg, block_aprende_coursenavigation{{/str}}">
                                                     Optional
                                                     {{#pix}}docs, core{{/pix}}
                                                 </span>

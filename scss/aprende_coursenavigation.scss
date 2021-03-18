@@ -89,7 +89,7 @@ $default-section-font-size: 18px;
         }
     }
     .section-body .activities {
-        padding: 8px 24px 8px 40px;
+        padding: 8px 8px 8px 40px;
         margin: 0;
     }
     .section-title, .section-body .activities > li {
@@ -141,6 +141,10 @@ $default-section-font-size: 18px;
         }
     }
     .activity-title__link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
 
         .activityname {
             font-family: Source Sans Pro;
@@ -160,10 +164,7 @@ $default-section-font-size: 18px;
             border-radius: 4px;
             font-size: 9px;
             color: #718096;
-            padding: 2px 4px;
-            position: absolute;
-            bottom: 11px;
-            right: 0;
+            padding: 2px 2px 2px 4px;
             > .icon {
                 cursor: pointer;
                 margin: 0;

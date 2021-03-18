@@ -124,10 +124,7 @@ class block_aprende_coursenavigation extends block_base {
 
         if (!$format->uses_sections()) {
             if (debugging()) {
-                $this->content->text = get_string(
-                        'notusingsections',
-                        'block_aprende_coursenavigation'
-                );
+                $this->content->text = '';
             }
             return $this->content;
         }
@@ -327,7 +324,9 @@ class block_aprende_coursenavigation extends block_base {
             // Show the restricted section
             if (!$section->uservisible) {
                 $thissection->restricted = true;
-                $thissection->availableinfo = $section->availableinfo;
+                $thissection->conditions = \core_availability\info::format_info(
+                    $section->availableinfo, $course
+                );
             }
 
             // Show subtitle section property if exist
@@ -386,7 +385,9 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->url = '';
                         $thismod->onclick = '';
                         $thismod->disabled = 'true';
-                        $thismod->conditions = $module->availableinfo;
+                        $thismod->conditions = \core_availability\info::format_info(
+                            $module->availableinfo, $course
+                        );
                     } else {
                         $thismod->available = 'true';
                     }
