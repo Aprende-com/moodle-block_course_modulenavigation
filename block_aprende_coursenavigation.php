@@ -154,8 +154,28 @@ class block_aprende_coursenavigation extends block_base {
 
         $completioninfo = new completion_info($course);
 
+        $continuationclass = '\block_aprendeoverview\course_continuation_info';
+
+        if (class_exists($continuationclass)) {
+            $continfo = new \block_aprendeoverview\course_continuation_info($course, $USER);
+            if (
+                !empty($link = $continfo->continuation_link) &&
+                $continfo->continuation_link instanceof moodle_url
+            ) {
+                $lastcmid = $link->get_param('id');
+
+                try {
+                    $lastcm = $modinfo->get_cm($lastcmid);
+                    $lastsection = $modinfo->get_section_info($lastcm->sectionnum);
+
+                } catch (\Exception $e) {
+                    debugging("Heads up: {$e->getMessage()}");
+                }
+            }
+        }
+
         if ($completioninfo->is_enabled()) {
-            $template->coursecompletionon = 'completion';
+            $template->coursecompletionon = true;
         }
 
         $completionok = [
@@ -282,6 +302,10 @@ class block_aprende_coursenavigation extends block_base {
             $thissection->title = $title;
             $thissection->url = $format->get_view_url($section);
             $thissection->selected = false;
+
+            if ($section == $lastsection) {
+                $thissection->lastviewed = true;
+            }
 
             if (strlen($title) >= 40) {
                 $thissection->shouldbeshort = true;

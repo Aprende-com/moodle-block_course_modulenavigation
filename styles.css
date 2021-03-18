@@ -69,7 +69,7 @@
     .block.block_aprende_coursenavigation .section-heading__subtitle > i {
       color: #FC1244; }
   .block.block_aprende_coursenavigation .section-body .activities {
-    padding: 8px 8px 8px 40px;
+    padding: 8px 10px 8px 40px;
     margin: 0; }
   .block.block_aprende_coursenavigation .section-title .availability-info > img {
     margin: 0;
@@ -80,7 +80,8 @@
     justify-content: flex-start;
     align-items: center; }
   .block.block_aprende_coursenavigation .section-title__icon {
-    transform: translateY(-2px); }
+    transform: translateY(-2px);
+    min-width: 28px; }
   .block.block_aprende_coursenavigation .section-title__link {
     margin-left: 4px; }
     .block.block_aprende_coursenavigation .section-title__link > a, .block.block_aprende_coursenavigation .section-title__link span {

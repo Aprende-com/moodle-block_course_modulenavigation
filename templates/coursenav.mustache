@@ -56,6 +56,7 @@
         ]
     }
 }}
+
 <div class="section-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="course-info">
         <a href="{{courseurl}}">
@@ -104,10 +105,12 @@
                             {{/restricted}}
                             {{^restricted}}
                             <div class="section-title__icon">
+                                {{#lastviewed}}
                                 <button type="button" class="availability-info" data-toggle="popover"
-                                        data-container="body" data-placement="bottom" data-content="Continue your course from here" data-html="true">
+                                        data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
                                     {{#pix}}i/continue, block_aprende_coursenavigation{{/pix}}
                                 </button>
+                                {{/lastviewed}}
                             </div>
                             <div class="section-title__link">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"

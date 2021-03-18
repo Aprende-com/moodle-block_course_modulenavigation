@@ -97,7 +97,7 @@ $default-section-font-size: 18px;
         }
     }
     .section-body .activities {
-        padding: 8px 8px 8px 40px;
+        padding: 8px 10px 8px 40px;
         margin: 0;
     }
     .section-title {
@@ -116,6 +116,7 @@ $default-section-font-size: 18px;
     }
     .section-title__icon {
         transform: translateY(-2px);
+        min-width: 28px;
     }
 
     .section-title__link {
