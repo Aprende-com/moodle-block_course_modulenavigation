@@ -139,7 +139,12 @@
                                                     {{#pix}}i/completion-auto-pass, core, {{#str}}completion-y, block_aprende_coursenavigation{{/str}}{{/pix}}
                                                 {{/completed}}
                                                 {{^completed}}
-                                                    {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                    {{^completedfail}}
+                                                        {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                    {{/completedfail}}
+                                                    {{#completedfail}}
+                                                        {{#pix}}i/completion-auto-fail, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                    {{/completedfail}}
                                                 {{/completed}}
                                             {{/completionon}}
                                         {{/available}}

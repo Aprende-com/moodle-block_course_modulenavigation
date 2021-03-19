@@ -153,6 +153,12 @@ $default-section-font-size: 18px;
             height: 20px;
 
         }
+        > img[src*="completion-auto-fail"] {
+            width: 32px;
+            height: 32px;
+            margin-right: 0;
+            transform: translate(-6px);
+        }
     }
     .activity-title__link {
         display: flex;

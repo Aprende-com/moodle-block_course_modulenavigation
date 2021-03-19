@@ -450,13 +450,19 @@ class block_aprende_coursenavigation extends block_base {
                             $module,
                             true
                     );
+
                     if (in_array(
                             $completiondata->completionstate,
                             $completionok
                     )) {
                         $thismod->completeclass = 'completed';
-                        $thismod->completed = 'true';
+                        $thismod->completed = true;
                     }
+
+                    if ($completiondata->completionstate == COMPLETION_COMPLETE_FAIL) {
+                        $thismod->completedfail = true;
+                    }
+
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);
