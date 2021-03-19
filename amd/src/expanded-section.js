@@ -8,10 +8,9 @@ const init = (lefthandsections) => {
 const registerEventListeners = selector => {
     const $element = document.querySelector(selector);
     $element.addEventListener('click', event => {
-        if (event.target.dataset.toggle == 'collapse' && event.target.dataset.parent == '#accordion') {
+        if (event.target.dataset.toggle == 'collapse' && event.target.closest('.section-title__link')) {
             const $allsections = document.querySelectorAll(selector + '>.section');
             const $sectionLink = event.target;
-            window.console.log($sectionLink);
             const $parent = event.target.closest('.section');
 
             $allsections.forEach(function($section) {
