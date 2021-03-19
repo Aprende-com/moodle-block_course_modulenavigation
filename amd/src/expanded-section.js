@@ -2,21 +2,28 @@
  * AMD module to manage expanded sections state
  */
 const init = (lefthandsections) => {
-    registerEventListener(lefthandsections);
+    registerEventListeners(lefthandsections);
 };
 
-const registerEventListener = selector => {
+const registerEventListeners = selector => {
     const $element = document.querySelector(selector);
     $element.addEventListener('click', event => {
-        if (event.target.dataset.toggle == 'collapse' && event.target.dataset.parent == '#accordion') {
+        if (event.target.dataset.toggle == 'collapse' && event.target.closest('.section-title__link')) {
+            const $allsections = document.querySelectorAll(selector + '>.section');
+            const $sectionLink = event.target;
             const $parent = event.target.closest('.section');
-            if ($parent) {
-                const $allsections = document.querySelectorAll(selector + '>.section');
-                $allsections.forEach(function(item) {
-                    item.classList.remove('current');
-                });
-                $parent.classList.add('current');
-            }
+
+            $allsections.forEach(function($section) {
+                $section.classList.remove('current');
+                $section.querySelector('.module-navigation-section-heading').classList.remove('underline');
+            });
+
+            setTimeout(() => {
+                if ($sectionLink.getAttribute('aria-expanded') == 'true') {
+                        $parent.querySelector('.module-navigation-section-heading').classList.add('underline');
+                        $parent.classList.add('current');
+                }
+            }, 250);
         }
     });
 };

@@ -154,8 +154,28 @@ class block_aprende_coursenavigation extends block_base {
 
         $completioninfo = new completion_info($course);
 
+        $continuationclass = '\block_aprendeoverview\course_continuation_info';
+
+        if (class_exists($continuationclass)) {
+            $continfo = new \block_aprendeoverview\course_continuation_info($course, $USER);
+            if (
+                !empty($link = $continfo->continuation_link) &&
+                $continfo->continuation_link instanceof moodle_url
+            ) {
+                $lastcmid = $link->get_param('id');
+
+                try {
+                    $lastcm = $modinfo->get_cm($lastcmid);
+                    $lastsection = $modinfo->get_section_info($lastcm->sectionnum);
+
+                } catch (\Exception $e) {
+                    debugging("Heads up: {$e->getMessage()}");
+                }
+            }
+        }
+
         if ($completioninfo->is_enabled()) {
-            $template->completionon = 'completion';
+            $template->coursecompletionon = true;
         }
 
         $completionok = [
@@ -283,6 +303,12 @@ class block_aprende_coursenavigation extends block_base {
             $thissection->url = $format->get_view_url($section);
             $thissection->selected = false;
 
+            if (isset($lastsection)) {
+                if ($section == $lastsection) {
+                    $thissection->lastviewed = true;
+                }
+            }
+
             if (strlen($title) >= 40) {
                 $thissection->shouldbeshort = true;
             }
@@ -315,10 +341,6 @@ class block_aprende_coursenavigation extends block_base {
             } else {
                 // Show  titles and contents.
                 $thissection->onlytitles = false;
-            }
-
-            if ($i == $selected && !$inactivity) {
-                $thissection->selected = true;
             }
 
             // Show the restricted section
@@ -417,20 +439,26 @@ class block_aprende_coursenavigation extends block_base {
 
                     $hascompletion = $completioninfo->is_enabled($module);
                     if ($hascompletion) {
-                        $thismod->completeclass = 'incomplete';
+                        $thismod->completionon = true;
                     }
 
                     $completiondata = $completioninfo->get_data(
                             $module,
                             true
                     );
+
                     if (in_array(
                             $completiondata->completionstate,
                             $completionok
                     )) {
                         $thismod->completeclass = 'completed';
-                        $thismod->completed = 'true';
+                        $thismod->completed = true;
                     }
+
+                    if ($completiondata->completionstate == COMPLETION_COMPLETE_FAIL) {
+                        $thismod->completedfail = true;
+                    }
+
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);

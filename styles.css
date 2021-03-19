@@ -33,10 +33,24 @@
     border-bottom: 1px solid #252b65;
     padding: 30px 0 12px 0;
     margin: 10px; }
+    .block.block_aprende_coursenavigation .section:hover {
+      background: #111457;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 250ms ease;
+      border: none; }
     .block.block_aprende_coursenavigation .section.current {
       background: #111457;
       border-radius: 8px;
-      border: none; }
+      border: none;
+      transition: background 750ms ease; }
+    .block.block_aprende_coursenavigation .section .availability-info {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 0;
+      min-width: 30px;
+      min-height: 30px; }
   .block.block_aprende_coursenavigation > .card-body {
     padding: 0 !important; }
     .block.block_aprende_coursenavigation > .card-body > .card-title {
@@ -46,6 +60,10 @@
   .block.block_aprende_coursenavigation .module-navigation-section-heading {
     position: relative;
     padding-right: 8px; }
+    .block.block_aprende_coursenavigation .module-navigation-section-heading.underline {
+      border-bottom: 1px solid #373B7B;
+      padding-bottom: 12px;
+      transition: all 750ms ease; }
   .block.block_aprende_coursenavigation .section-heading__subtitle {
     font-family: Source Sans Pro;
     font-style: normal;
@@ -62,14 +80,19 @@
     .block.block_aprende_coursenavigation .section-heading__subtitle > i {
       color: #FC1244; }
   .block.block_aprende_coursenavigation .section-body .activities {
-    padding: 8px 8px 8px 40px;
+    padding: 8px 10px 8px 40px;
     margin: 0; }
+  .block.block_aprende_coursenavigation .section-title .availability-info > img {
+    margin: 0;
+    width: 25px;
+    height: 25px; }
   .block.block_aprende_coursenavigation .section-title, .block.block_aprende_coursenavigation .section-body .activities > li {
     display: flex;
     justify-content: flex-start;
     align-items: center; }
   .block.block_aprende_coursenavigation .section-title__icon {
-    transform: translateY(-2px); }
+    transform: translateY(-2px);
+    min-width: 28px; }
   .block.block_aprende_coursenavigation .section-title__link {
     margin-left: 4px; }
     .block.block_aprende_coursenavigation .section-title__link > a, .block.block_aprende_coursenavigation .section-title__link span {
@@ -79,26 +102,26 @@
       font-style: normal;
       font-weight: normal;
       line-height: 19px; }
-  .block.block_aprende_coursenavigation .availability-info {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-left: 0;
-    min-width: 30px;
-    min-height: 30px; }
-    .block.block_aprende_coursenavigation .availability-info > img {
-      margin: 0;
-      width: 25px;
-      height: 25px; }
   .block.block_aprende_coursenavigation .section-body .activities > li {
     position: relative;
     list-style: none;
     padding: 10px 0; }
+    .block.block_aprende_coursenavigation .section-body .activities > li .availability-info > img {
+      margin: 0;
+      width: 28px;
+      height: 28px;
+      transform: translate(-7px); }
   .block.block_aprende_coursenavigation .activity-title__icon {
-    transform: translateX(-6px); }
+    transform: translateX(-6px);
+    min-width: 26px; }
     .block.block_aprende_coursenavigation .activity-title__icon > img {
       width: 20px;
       height: 20px; }
+    .block.block_aprende_coursenavigation .activity-title__icon > img[src*="completion-auto-fail"] {
+      width: 32px;
+      height: 32px;
+      margin-right: 0;
+      transform: translate(-6px); }
   .block.block_aprende_coursenavigation .activity-title__link {
     display: flex;
     justify-content: space-between;
