@@ -113,8 +113,8 @@
                                 {{/lastviewed}}
                             </div>
                             <div class="section-title__link">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{number}}"
-                                   aria-expanded="true" aria-controls="collapse{{number}}" title="{{{title}}}">
+                                <a class="collapsed" data-toggle="collapse" href="#collapse{{number}}"
+                                   aria-expanded="false" aria-controls="collapse{{number}}" title="{{{title}}}">
                                     {{> block_aprende_coursenavigation/coursenav_sectionname }}
                                 </a>
                             </div>
@@ -125,7 +125,7 @@
             </div>
 
             <!-- This is the collapse -->
-            <div id="collapse{{number}}" class="section-collapse collapse {{#selected}}show{{/selected}}" role="tabsection" aria-labelledby="heading{{number}}">
+            <div id="collapse{{number}}" data-parent="#accordion" class="section-collapse collapse {{#selected}}show{{/selected}}" role="tabsection" aria-labelledby="heading{{number}}">
                 <div class="section-body">
                     <ul class="activities">
                         {{#modules}}

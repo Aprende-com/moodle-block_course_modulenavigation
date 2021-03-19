@@ -343,10 +343,6 @@ class block_aprende_coursenavigation extends block_base {
                 $thissection->onlytitles = false;
             }
 
-            if ($i == $selected && !$inactivity) {
-                $thissection->selected = true;
-            }
-
             // Show the restricted section
             if (!$section->uservisible) {
                 $thissection->restricted = true;

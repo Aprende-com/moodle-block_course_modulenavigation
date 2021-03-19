@@ -33,10 +33,17 @@
     border-bottom: 1px solid #252b65;
     padding: 30px 0 12px 0;
     margin: 10px; }
+    .block.block_aprende_coursenavigation .section:hover {
+      background: #111457;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 250ms ease;
+      border: none; }
     .block.block_aprende_coursenavigation .section.current {
       background: #111457;
       border-radius: 8px;
-      border: none; }
+      border: none;
+      transition: background 750ms ease; }
     .block.block_aprende_coursenavigation .section .availability-info {
       background: none;
       border: none;
@@ -53,6 +60,10 @@
   .block.block_aprende_coursenavigation .module-navigation-section-heading {
     position: relative;
     padding-right: 8px; }
+    .block.block_aprende_coursenavigation .module-navigation-section-heading.underline {
+      border-bottom: 1px solid #373B7B;
+      padding-bottom: 12px;
+      transition: all 750ms ease; }
   .block.block_aprende_coursenavigation .section-heading__subtitle {
     font-family: Source Sans Pro;
     font-style: normal;

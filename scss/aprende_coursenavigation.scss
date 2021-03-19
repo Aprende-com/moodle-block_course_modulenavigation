@@ -50,10 +50,18 @@ $default-section-font-size: 18px;
         border-bottom: 1px solid #252b65;
         padding: 30px 0 12px 0;
         margin: 10px;
+        &:hover {
+            background: $academic-blue;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 250ms ease;
+            border: none;
+        }
         &.current {
             background: $academic-blue;
             border-radius: 8px;
             border: none;
+            transition: background 750ms ease;
         }
         .availability-info {
             background: none;
@@ -77,6 +85,11 @@ $default-section-font-size: 18px;
     .module-navigation-section-heading {
         position: relative;
         padding-right: 8px;
+        &.underline {
+            border-bottom: 1px solid #373B7B;
+            padding-bottom: 12px;
+            transition: all 750ms ease;
+        }
     }
     .section-heading__subtitle {
         font-family: Source Sans Pro;
