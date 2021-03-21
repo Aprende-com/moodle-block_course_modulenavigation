@@ -464,6 +464,10 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->completedfail = true;
                     }
 
+                    if (isset($PAGE->cm->url) && $module->url === $PAGE->cm->url) {
+                        $thismod->currentinpage = true;
+                    }
+
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);
