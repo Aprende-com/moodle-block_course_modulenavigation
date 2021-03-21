@@ -366,12 +366,17 @@ class block_aprende_coursenavigation extends block_base {
                         continue;
                     }
 
-                    if(isset($course->activities_enabled) &&
-                        $course->activities_enabled &&
-                        in_array($modnumber, explode(",", $course->activitiessection)) &&
-                        !$this->page->user_is_editing() &&
-                        $USER->profile['folio'] % 2 === 0) {
-                        continue;
+                    // Practical activities experiment
+                    if (isset($course->activities_enabled) &&
+                        isset($course->activitiessection ) &&
+                        array_key_exists('folio', $USER->profile)) {
+
+                        if ($course->activities_enabled &&
+                            in_array($modnumber, explode(",", $course->activitiessection)) &&
+                            !$this->page->user_is_editing() &&
+                            $USER->profile['folio'] % 2 === 0) {
+                            continue;
+                        }
                     }
 
                     if (!$module->visible || !$module->visibleoncoursepage) {
