@@ -94,7 +94,7 @@ jobs:
           --header "Content-Type: application/json" \
           --data "{\"text\": \"${MESSAGE}\"}"
       - name: run automated tests
-        continue-on-error: true
+        #continue-on-error: true
         run: |
          chmod +x src/test/resources/webdriver/linux/chromedriver
          if [[ -e /var/www/reports/${{ github.event.head_commit.message }} ]]; then sudo rm -rf /var/www/reports/${{ github.event.head_commit.message }}; fi
@@ -102,6 +102,17 @@ jobs:
          mvn clean install -DskipTests
          echo mvn clean verify -Dcucumber.options="--tags @issue:${{ github.event.head_commit.message }}"
          mvn clean verify -Dcucumber.options="--tags @issue:${{ github.event.head_commit.message }}" -Dserenity.public.url="http://reports.aprende.dev/${{ github.event.head_commit.message }}"
+      - name: Test has failures
+        if: ${{ failure() }}
+        run: |
+         sudo cp -rf target/site/serenity /var/www/reports/${{ github.event.head_commit.message }}
+         sudo cp -rf target/site/serenity /var/www/reports/${{ github.event.head_commit.message }}
+         echo http://reports.aprende.dev/${{ github.event.head_commit.message }}
+         sudo rm -rf *
+         export MESSAGE="Test report for <https://aprende.atlassian.net/browse/${{ github.event.head_commit.message }}|*${{ github.event.head_commit.message }}*> *contains failures* ! Report is available --> <http://reports.aprende.dev/${{ github.event.head_commit.message }}|View Report>"
+         curl -X POST "${{ secrets.SLACK_WEBHOOK_URL_QA }}" \
+         --header "Content-Type: application/json" \
+         --data "{\"text\": \"${MESSAGE}\"}"
       - name: copy files
         #if: always()
         run: sudo cp -rf target/site/serenity /var/www/reports/${{ github.event.head_commit.message }}
@@ -114,14 +125,15 @@ jobs:
       - name: slack notification
         #if: always ()
         run: |
-          export MESSAGE="Test report for <https://aprende.atlassian.net/browse/${{ github.event.head_commit.message }}|*${{ github.event.head_commit.message }}*> is available! --> <http://reports.aprende.dev/${{ github.event.head_commit.message }}|View Report>"
+          export MESSAGE="Test report for <https://aprende.atlassian.net/browse/${{ github.event.head_commit.message }}|*${{ github.event.head_commit.message }}*>  *100% success*, report is available --> <http://reports.aprende.dev/${{ github.event.head_commit.message }}|View Report>"
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
           --header "Content-Type: application/json" \
           --data "{\"text\": \"${MESSAGE}\"}"
       - name: slack notification QA
         #if: always ()
         run: |
-          export MESSAGE="Test report for <https://aprende.atlassian.net/browse/${{ github.event.head_commit.message }}|*${{ github.event.head_commit.message }}*> is available! --> <http://reports.aprende.dev/${{ github.event.head_commit.message }}|View Report>"
+          export MESSAGE="Test report for <https://aprende.atlassian.net/browse/${{ github.event.head_commit.message }}|*${{ github.event.head_commit.message }}*>  *100% success*, report is available --> <http://reports.aprende.dev/${{ github.event.head_commit.message }}|View Report>"
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL_QA }}" \
           --header "Content-Type: application/json" \
           --data "{\"text\": \"${MESSAGE}\"}"
+
