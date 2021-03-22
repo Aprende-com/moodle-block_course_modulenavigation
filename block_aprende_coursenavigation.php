@@ -420,7 +420,6 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if ($module->modname == 'label') {
-                        // TODO: Confirm the title class on the standp up
                         $htmltitleregexp = '/<h[1-6] class="content-separator">(?<titletext>.+?)<\/h[1-6]>/iu';
 
                         $titlematch = [];
