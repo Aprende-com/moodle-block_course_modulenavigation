@@ -420,7 +420,6 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if ($module->modname == 'label') {
-                        // TODO: Confirm the title class on the standp up
                         $htmltitleregexp = '/<h[1-6] class="content-separator">(?<titletext>.+?)<\/h[1-6]>/iu';
 
                         $titlematch = [];
@@ -462,6 +461,10 @@ class block_aprende_coursenavigation extends block_base {
 
                     if ($completiondata->completionstate == COMPLETION_COMPLETE_FAIL) {
                         $thismod->completedfail = true;
+                    }
+
+                    if (isset($PAGE->cm->url) && $module->url === $PAGE->cm->url) {
+                        $thismod->currentinpage = true;
                     }
 
                     $thissection->modules[] = $thismod;
