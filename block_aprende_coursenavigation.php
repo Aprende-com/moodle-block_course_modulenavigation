@@ -366,12 +366,17 @@ class block_aprende_coursenavigation extends block_base {
                         continue;
                     }
 
-                    if(isset($course->activities_enabled) &&
-                        $course->activities_enabled &&
-                        in_array($modnumber, explode(",", $course->activitiessection)) &&
-                        !$this->page->user_is_editing() &&
-                        $USER->profile['folio'] % 2 === 0) {
-                        continue;
+                    // Practical activities experiment
+                    if (isset($course->activities_enabled) &&
+                        isset($course->activitiessection ) &&
+                        array_key_exists('folio', $USER->profile)) {
+
+                        if ($course->activities_enabled &&
+                            in_array($modnumber, explode(",", $course->activitiessection)) &&
+                            !$this->page->user_is_editing() &&
+                            $USER->profile['folio'] % 2 === 0) {
+                            continue;
+                        }
                     }
 
                     if (!$module->visible || !$module->visibleoncoursepage) {
@@ -415,7 +420,6 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     if ($module->modname == 'label') {
-                        // TODO: Confirm the title class on the standp up
                         $htmltitleregexp = '/<h[1-6] class="content-separator">(?<titletext>.+?)<\/h[1-6]>/iu';
 
                         $titlematch = [];
@@ -457,6 +461,10 @@ class block_aprende_coursenavigation extends block_base {
 
                     if ($completiondata->completionstate == COMPLETION_COMPLETE_FAIL) {
                         $thismod->completedfail = true;
+                    }
+
+                    if (isset($PAGE->cm->url) && $module->url === $PAGE->cm->url) {
+                        $thismod->currentinpage = true;
                     }
 
                     $thissection->modules[] = $thismod;

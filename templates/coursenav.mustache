@@ -67,7 +67,7 @@
         {{/coursecategory}}
     </div>
     {{#sections}}
-        <div class="section section-default {{#selected}}current{{/selected}}">
+        <div class="section section-default">
             <div class="module-navigation-section-heading" role="tab" id="heading{{number}}">
                 <div class="section-title">
                     {{#sectionlabel}}
@@ -106,16 +106,18 @@
                             {{^restricted}}
                             <div class="section-title__icon">
                                 {{#lastviewed}}
-                                <button type="button" class="availability-info" data-toggle="popover"
-                                        data-container="body" data-placement="bottom" data-content="{{conditions}}" data-html="true">
+                                <span type="button" class="availability-info">
                                     {{#pix}}i/continue, block_aprende_coursenavigation{{/pix}}
-                                </button>
+                                </span>
                                 {{/lastviewed}}
                             </div>
-                            <div class="section-title__link">
-                                <a class="collapsed" data-toggle="collapse" href="#collapse{{number}}"
+                            <div class="section-title__link w-100">
+                                <a class="d-flex justify-content-between align-items-center" data-toggle="collapse" href="#collapse{{number}}"
                                    aria-expanded="false" aria-controls="collapse{{number}}" title="{{{title}}}">
                                     {{> block_aprende_coursenavigation/coursenav_sectionname }}
+                                    <div>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </div>
                                 </a>
                             </div>
                             {{/restricted}}
@@ -125,28 +127,36 @@
             </div>
 
             <!-- This is the collapse -->
-            <div id="collapse{{number}}" data-parent="#accordion" class="section-collapse collapse {{#selected}}show{{/selected}}" role="tabsection" aria-labelledby="heading{{number}}">
+            <div id="collapse{{number}}" data-parent="#accordion" class="section-collapse collapse" role="tabsection" aria-labelledby="heading{{number}}">
                 <div class="section-body">
                     <ul class="activities">
                         {{#modules}}
                             {{^onlytitles}}
-                                <li>
+                                <li class="{{#currentinpage}}current{{/currentinpage}}">
                                     {{^label}}
                                     <div class="activity-title__icon">
                                         {{#available}}
-                                            {{#completionon}}
-                                                {{#completed}}
-                                                    {{#pix}}i/completion-auto-pass, core, {{#str}}completion-y, block_aprende_coursenavigation{{/str}}{{/pix}}
-                                                {{/completed}}
-                                                {{^completed}}
-                                                    {{^completedfail}}
-                                                        {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
-                                                    {{/completedfail}}
-                                                    {{#completedfail}}
-                                                        {{#pix}}i/completion-auto-fail, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
-                                                    {{/completedfail}}
-                                                {{/completed}}
-                                            {{/completionon}}
+                                            {{#currentinpage}}
+                                                <button type="button" class="availability-info" data-toggle="popover"
+                                                        data-container="body" data-placement="bottom" data-content="Continue from here" data-html="true">
+                                                    {{#pix}}i/continue, block_aprende_coursenavigation{{/pix}}
+                                                </button>
+                                            {{/currentinpage}}
+                                            {{^currentinpage}}
+                                                {{#completionon}}
+                                                    {{#completed}}
+                                                        {{#pix}}i/completion-auto-pass, core, {{#str}}completion-y, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                    {{/completed}}
+                                                    {{^completed}}
+                                                        {{^completedfail}}
+                                                            {{#pix}}i/completion-manual-n, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                        {{/completedfail}}
+                                                        {{#completedfail}}
+                                                            {{#pix}}i/completion-auto-fail, core, {{#str}}completion-n, block_aprende_coursenavigation{{/str}}{{/pix}}
+                                                        {{/completedfail}}
+                                                    {{/completed}}
+                                                {{/completionon}}
+                                            {{/currentinpage}}
                                         {{/available}}
                                         {{^available}}
                                             <button type="button" class="availability-info" data-toggle="popover"
