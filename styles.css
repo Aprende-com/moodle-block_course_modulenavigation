@@ -2,10 +2,10 @@
 /* Fonts */
 .block.block_aprende_coursenavigation {
   border: none;
-  border-top: 1px solid #4D529F;
+  border-top: 1px solid #4d529f;
   margin: 0 !important; }
   .block.block_aprende_coursenavigation > .card-body {
-    background: #0B0E41; }
+    background: #0b0e41; }
   .block.block_aprende_coursenavigation .course-info {
     padding: 28px 24px; }
     .block.block_aprende_coursenavigation .course-info .course-info__title {
@@ -15,7 +15,7 @@
       font-size: 32px;
       line-height: 36px;
       /* identical to box height */
-      color: #FFF;
+      color: #fff;
       margin: 0; }
     .block.block_aprende_coursenavigation .course-info .course-info__category {
       font-family: Source Sans Pro;
@@ -26,9 +26,9 @@
       letter-spacing: -0.02em;
       text-transform: uppercase;
       /* White */
-      color: #FFF; }
+      color: #fff; }
   .block.block_aprende_coursenavigation .section-group {
-    background: #0B0E41; }
+    background: #0b0e41; }
   .block.block_aprende_coursenavigation .section {
     border-bottom: 1px solid #252b65;
     margin: 0;
@@ -64,14 +64,13 @@
     font-size: 12px;
     line-height: 18px;
     letter-spacing: -0.02em;
-    letter-spacing: 0;
     text-transform: uppercase;
-    color: #FFF;
+    color: #fff;
     position: absolute;
     top: 12px;
     left: 36px; }
     .block.block_aprende_coursenavigation .section-heading__subtitle > i {
-      color: #FC1244; }
+      color: #fc1244; }
   .block.block_aprende_coursenavigation .section-body .activities {
     background: #111457;
     padding: 0;
@@ -82,7 +81,8 @@
     margin: 0;
     width: 25px;
     height: 25px; }
-  .block.block_aprende_coursenavigation .section-title, .block.block_aprende_coursenavigation .section-body .activities > li {
+  .block.block_aprende_coursenavigation .section-title,
+  .block.block_aprende_coursenavigation .section-body .activities > li {
     display: flex;
     justify-content: flex-start;
     align-items: center; }
@@ -90,8 +90,9 @@
     min-width: 28px; }
   .block.block_aprende_coursenavigation .section-title__link {
     margin-left: 4px; }
-    .block.block_aprende_coursenavigation .section-title__link > a, .block.block_aprende_coursenavigation .section-title__link span {
-      color: #FFF;
+    .block.block_aprende_coursenavigation .section-title__link > a,
+    .block.block_aprende_coursenavigation .section-title__link span {
+      color: #fff;
       font-family: "Collier";
       font-size: 18px;
       font-style: normal;
@@ -136,12 +137,12 @@
       font-size: 16px;
       line-height: 20px;
       letter-spacing: -0.02em;
-      color: #FFF; }
+      color: #fff; }
     .block.block_aprende_coursenavigation .activity-title__link > a:hover {
       text-decoration: underline;
-      text-decoration-color: #FFF; }
+      text-decoration-color: #fff; }
     .block.block_aprende_coursenavigation .activity-title__link > .optional-badge {
-      background: #F6F6F9;
+      background: #f6f6f9;
       border-radius: 4px;
       font-size: 9px;
       color: #718096;
@@ -151,7 +152,7 @@
         margin: 0; }
   .block.block_aprende_coursenavigation .content-separator .title {
     font-family: Collier;
-    color: #FC1244;
+    color: #fc1244;
     font-weight: 400;
     font-size: 20px;
     border-left: 3px solid #fc1244;

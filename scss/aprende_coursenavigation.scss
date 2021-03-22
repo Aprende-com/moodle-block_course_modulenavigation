@@ -1,10 +1,10 @@
 /* Colors */
-$white: #FFF;
-$deep-cove: #0B0E41;
+$white: #fff;
+$deep-cove: #0b0e41;
 $academic-blue: #111457;
-$flama-red: #FC1244;
+$flama-red: #fc1244;
 $dark-gray: #718096;
-$dark-gray-border: #4D529F;
+$dark-gray-border: #4d529f;
 
 /* Fonts */
 $default-section-font: "Collier";
@@ -13,7 +13,7 @@ $default-section-font-size: 18px;
 .block.block_aprende_coursenavigation {
     border: none;
     border-top: 1px solid $dark-gray-border;
-    margin: 0!important;
+    margin: 0 !important;
     & > .card-body {
         background: $deep-cove;
     }
@@ -93,7 +93,6 @@ $default-section-font-size: 18px;
         font-size: 12px;
         line-height: 18px;
         letter-spacing: -0.02em;
-        letter-spacing: 0;
         text-transform: uppercase;
         color: $white;
         position: absolute;
@@ -119,7 +118,8 @@ $default-section-font-size: 18px;
             }
         }
     }
-    .section-title, .section-body .activities > li {
+    .section-title,
+    .section-body .activities > li {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -130,7 +130,8 @@ $default-section-font-size: 18px;
 
     .section-title__link {
         margin-left: 4px;
-        > a, span {
+        > a,
+        span {
             color: $white;
             font-family: $default-section-font;
             font-size: $default-section-font-size;
@@ -158,7 +159,7 @@ $default-section-font-size: 18px;
                     width: 28px;
                     height: 28px;
                     &[src*="locked-info"] {
-                        transform: translate(-7px,-2px);
+                        transform: translate(-7px, -2px);
                     }
                 }
             }
@@ -200,7 +201,7 @@ $default-section-font-size: 18px;
             text-decoration-color: $white;
         }
         > .optional-badge {
-            background: #F6F6F9;
+            background: #f6f6f9;
             border-radius: 4px;
             font-size: 9px;
             color: #718096;
@@ -214,7 +215,7 @@ $default-section-font-size: 18px;
     .content-separator {
         .title {
             font-family: Collier;
-            color: #FC1244;
+            color: #fc1244;
             font-weight: 400;
             font-size: 20px;
             border-left: 3px solid #fc1244;
