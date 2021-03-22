@@ -19,13 +19,14 @@ namespace block_aprende_coursenavigation\tests;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * File description for block course navigation.
+ * Testsuite class for block course navigation.
  *
  * @package    block_aprende_coursenavigation
  * @copyright  David OC <davidherzlos@aprende.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_aprende_coursenavigation_testcase extends \advanced_testcase {
+
     /**
      * @testdox Given something, expect something
      * @test
