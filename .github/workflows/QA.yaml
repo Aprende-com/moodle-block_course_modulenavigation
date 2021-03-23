@@ -41,7 +41,9 @@ jobs:
           sudo chmod -R 755 /tmp/moodle
       - name: generate JS
         run: |
-         PATH=$PATH:/home/ubuntu/bin:/home/ubuntu/.nvm/versions/node/v14.15.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+         export NVM_DIR="$HOME/.nvm"
+         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
          sudo chmod -R 777 /tmp/moodle
          nvm install 14.15
          npm install
