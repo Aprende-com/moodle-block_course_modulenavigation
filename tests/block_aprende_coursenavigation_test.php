@@ -18,6 +18,11 @@ namespace block_aprende_coursenavigation\tests;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+
+require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
+require_once($CFG->dirroot . '/blocks/aprende_coursenavigation/block_aprende_coursenavigation.php');
+
 /**
  * Testsuite class for block course navigation.
  *
@@ -25,14 +30,24 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  David OC <davidherzlos@aprende.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 class block_aprende_coursenavigation_testcase extends \advanced_testcase {
 
     /**
-     * @testdox Given something, expect something
+     * @testdox Without any moodle_page state asociated, block's content object should be empty
      * @test
     */
-    public function test_something() {
+    public function test_block_content_object_empty_value() {
+        // Default structure for block's content object
+        $output = new \stdClass();
+        $output->footer = '';
+        $output->text = '';
 
-        $this->assertEquals(true, true);
+        // Block's content object
+        $block = new \block_aprende_coursenavigation();
+
+        $expected = $output;
+        $actual = $block->get_content();
+        $this->assertEquals($expected, $actual, 'Values should be equals');
     }
 }
