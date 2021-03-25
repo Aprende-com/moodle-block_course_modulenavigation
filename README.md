@@ -22,6 +22,14 @@ If you want to display course navigation on all pages of the course (main, activ
 
 **Labels**
 You can choose if labels are displayed or not in the menu with the option "toggleshowlabels".
+In case you use the following title pattern, the block will present it as a content separator:
+
+    <h1 class=”content-separator”>Label</h1>
+    <h2 class=”content-separator”>Label</h2>
+    <h3 class=”content-separator”>Label</h3>
+    <h4 class=”content-separator”>Label</h4>
+    <h5 class=”content-separator”>Label</h5>
+    <h6 class=”content-separator”>Label</h6>
 
 **Expand/open menu**
 You can chose if menu is always open with the option "togglecollapse"
