@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['config_blocktitle']                   = 'Block title';
-$string['config_blocktitle_default']           = 'Aprende Course Navigation';
+$string['config_blocktitle_default']           = 'Course Navigation';
 $string['config_blocktitle_help']              = 'Leave this field empty to use the default block title. If you define a title here, it will be used instead of the default one.';
 $string['config_onesection']                   = 'Show the current section only';
 $string['config_onesection_label']             = 'If enabled show one section only. If disabled show an accordion style menu';
 $string['course_modulenavigation:addinstance'] = 'Add a new course contents block';
 $string['notusingsections']                    = 'This course format does not use sections.';
-$string['pluginname']                          = 'Aprende Course Navigation';
+$string['pluginname']                          = 'Course Navigation';
 $string['toggleclickontitle']                  = 'Clicking on the title';
 $string['toggleclickontitle_desc']             = "'Displays the menu' or 'Goes to that page'.";
 $string['toggleclickontitle_menu']             = 'Displays the menu';
