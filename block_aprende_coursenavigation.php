@@ -96,16 +96,7 @@ class block_aprende_coursenavigation extends block_base {
             return $this->content;
         }
 
-        $selected = optional_param(
-                'section',
-                null,
-                PARAM_INT
-        );
-        $intab = optional_param(
-                'dtab',
-                null,
-                PARAM_TEXT
-        );
+        [$selected, $intab] = $this->get_page_params();
 
         $this->content = new stdClass();
         $this->content->footer = '';
@@ -150,7 +141,7 @@ class block_aprende_coursenavigation extends block_base {
 
         $modinfo = get_fast_modinfo($course);
 
-        $template = new stdClass();
+        $templatecontext = new stdClass();
 
         $completioninfo = new completion_info($course);
 
@@ -175,7 +166,7 @@ class block_aprende_coursenavigation extends block_base {
         }
 
         if ($completioninfo->is_enabled()) {
-            $template->coursecompletionon = true;
+            $templatecontext->coursecompletionon = true;
         }
 
         $completionok = [
@@ -242,19 +233,19 @@ class block_aprende_coursenavigation extends block_base {
             }
         }
 
-        $template->inactivity = $inactivity;
+        $templatecontext->inactivity = $inactivity;
 
         if (count($sections) > 1) {
-            $template->hasprevnext = true;
-            $template->hasnext = true;
-            $template->hasprev = true;
+            $templatecontext->hasprevnext = true;
+            $templatecontext->hasnext = true;
+            $templatecontext->hasprev = true;
         }
 
         $courseurl = new moodle_url(
                 '/course/view.php',
                 ['id' => $course->id]
         );
-        $template->courseurl = $courseurl->out();
+        $templatecontext->courseurl = $courseurl->out();
         $sectionnums = [];
         foreach ($sections as $section) {
             $sectionnums[] = $section->section;
@@ -470,7 +461,7 @@ class block_aprende_coursenavigation extends block_base {
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);
-                $template->sections[] = $thissection;
+                $templatecontext->sections[] = $thissection;
             }
             if ($thissection->selected) {
 
@@ -486,13 +477,13 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $i
                         ]
                 );
-                $template->courseurl = $courseurl->out();
+                $templatecontext->courseurl = $courseurl->out();
 
                 if ($pn->next === false) {
-                    $template->hasnext = false;
+                    $templatecontext->hasnext = false;
                 }
                 if ($pn->prev === false) {
-                    $template->hasprev = false;
+                    $templatecontext->hasprev = false;
                 }
 
                 $prevurl = new moodle_url(
@@ -502,7 +493,7 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $pn->prev
                         ]
                 );
-                $template->prevurl = $prevurl->out(false);
+                $templatecontext->prevurl = $prevurl->out(false);
 
                 $currurl = new moodle_url(
                         '/course/view.php',
@@ -511,7 +502,7 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $thissection->number
                         ]
                 );
-                $template->currurl = $currurl->out(false);
+                $templatecontext->currurl = $currurl->out(false);
 
                 $nexturl = new moodle_url(
                         '/course/view.php',
@@ -520,26 +511,32 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $pn->next
                         ]
                 );
-                $template->nexturl = $nexturl->out(false);
+                $templatecontext->nexturl = $nexturl->out(false);
             }
         }
         if ($intab) {
-            $template->inactivity = true;
+            $templatecontext->inactivity = true;
         }
-        $template->coursename = $course->fullname;
+        $templatecontext->coursename = $course->fullname;
         $category = core_course_category::get($course->category, IGNORE_MISSING, true);
 
         if (!is_null($category)) {
-            $template->coursecategory = $category->get_formatted_name();
+            $templatecontext->coursecategory = $category->get_formatted_name();
         }
 
-        $template->config = $this->config;
+        $templatecontext->config = $this->config;
         $renderer = $this->page->get_renderer(
                 'block_aprende_coursenavigation',
                 'nav'
         );
-        $this->content->text = $renderer->render_nav($template);
+
+        $this->templatecontext = $templatecontext;
+        $this->content->text = $renderer->render_nav($templatecontext);
         return $this->content;
+    }
+
+    public function get_template_context() {
+        return $this->templatecontext;
     }
 
     /**
@@ -579,5 +576,16 @@ class block_aprende_coursenavigation extends block_base {
     protected function get_navigation() {
         $this->page->navigation->initialise();
         return clone($this->page->navigation);
+    }
+
+    /**
+     * @return array|false|float|int|mixed|string|null
+     * @throws coding_exception
+     */
+    protected function get_page_params() {
+        return array(
+            optional_param('section', null, PARAM_INT),
+            optional_param('dtab', null, PARAM_TEXT)
+        );
     }
 }
