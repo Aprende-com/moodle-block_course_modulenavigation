@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['config_blocktitle']                   = 'Título del bloque';
-$string['config_blocktitle_default']           = 'Navegación del Curso de Aprende';
+$string['config_blocktitle_default']           = 'Navegación del Curso';
 $string['config_blocktitle_help']              = 'Deja este campo vacio para usar el título del block por defecto. Si defines un título aquí, será usado en lugar del título por defecto.';
 $string['config_onesection']                   = 'Mostrar sólo la sección actual';
 $string['config_onesection_label']             = 'Si habilitas, muestra sólo una sección. Si lo desabilitas muestra un menu estilo acordeón.';
