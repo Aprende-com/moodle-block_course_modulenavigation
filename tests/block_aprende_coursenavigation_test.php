@@ -22,7 +22,6 @@ global $CFG;
 
 require_once($CFG->dirroot . '/blocks/moodleblock.class.php');
 require_once($CFG->dirroot . '/blocks/aprende_coursenavigation/block_aprende_coursenavigation.php');
-require_once($CFG->dirroot . '/blocks/aprende_coursenavigation/lib.php');
 
 /**
  * Testsuite class for block course navigation.
