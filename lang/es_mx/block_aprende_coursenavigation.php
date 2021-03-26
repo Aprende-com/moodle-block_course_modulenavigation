@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['config_blocktitle']                   = 'Título del bloque';
-$string['config_blocktitle_default']           = 'Navegación del Curso de Aprende';
+$string['config_blocktitle_default']           = 'Navegación Curso';
 $string['config_blocktitle_help']              = 'Deja este campo vacio para usar el título del block por defecto. Si defines un título aquí, será usado en lugar del título por defecto.';
 $string['config_onesection']                   = 'Mostrar sólo la sección actual';
 $string['config_onesection_label']             = 'Si habilitas, muestra sólo una sección. Si lo desabilitas muestra un menu estilo acordeón.';
 $string['course_modulenavigation:addinstance'] = 'Añadir un nuevo bloque';
 $string['notusingsections']                    = 'Este formato de curso no utiliza secciones.';
-$string['pluginname']                          = 'Navegación del Curso de Aprende';
+$string['pluginname']                          = 'Navegación Curso';
 $string['toggleclickontitle']                  = 'Haciendo clic en el título';
 $string['toggleclickontitle_desc']             = "'Desplegar el menú' ó 'Ir hacia la página'.";
 $string['toggleclickontitle_menu']             = 'Despliega el menú';
