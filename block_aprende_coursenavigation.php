@@ -120,18 +120,7 @@ class block_aprende_coursenavigation extends block_base {
             return $this->content;
         }
 
-        if (($format instanceof format_digidagotabs) || ($format instanceof format_horizontaltabs)) {
-            // Don't show the menu in a tab.
-            if ($intab) {
-                return $this->content;
-            }
-            // Only show the block inside activities of courses.
-            if ($this->page->pagelayout == 'incourse') {
-                $sections = $format->tabs_get_sections();
-            }
-        } else {
-            $sections = $format->get_sections();
-        }
+        $sections = $format->get_sections();
 
         if (empty($sections)) {
             return $this->content;
@@ -147,6 +136,7 @@ class block_aprende_coursenavigation extends block_base {
 
         $continuationclass = '\block_aprendeoverview\course_continuation_info';
 
+        // Get last viewed section
         if (class_exists($continuationclass)) {
             $continfo = new \block_aprendeoverview\course_continuation_info($course, $USER);
             if (
@@ -358,16 +348,8 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     // Practical activities experiment
-                    if (isset($course->activities_enabled) &&
-                        isset($course->activitiessection ) &&
-                        array_key_exists('folio', $USER->profile)) {
-
-                        if ($course->activities_enabled &&
-                            in_array($modnumber, explode(",", $course->activitiessection)) &&
-                            !$this->page->user_is_editing() &&
-                            $USER->profile['folio'] % 2 === 0) {
-                            continue;
-                        }
+                    if ($this->should_skip_activity($module, $course)) {
+                        continue;
                     }
 
                     if (!$module->visible || !$module->visibleoncoursepage) {
@@ -579,7 +561,7 @@ class block_aprende_coursenavigation extends block_base {
     }
 
     /**
-     * @return array|false|float|int|mixed|string|null
+     * @return mixed[]
      * @throws coding_exception
      */
     protected function get_page_params() {
@@ -587,5 +569,31 @@ class block_aprende_coursenavigation extends block_base {
             optional_param('section', null, PARAM_INT),
             optional_param('dtab', null, PARAM_TEXT)
         );
+    }
+
+    /**
+     * Returns the true if this activity is part of the ap experiment and should be skipped, false if not
+     * @param $cm cm_info object
+     * @param $course stdClass course object
+     *
+     * @return navigation_node The navigation object to display
+     */
+    public function should_skip_activity(cm_info $cm, stdClass $course): bool {
+        global $USER;
+
+        $settingsdefined = $course->format === 'aprendetopics' &&
+            $course->activities_enabled && !empty($course->activitiessection) &&
+            isset($USER->profile);
+
+        if ($this->page->user_is_editing() || !$settingsdefined) {
+            return false;
+        }
+
+        // The settings are defined, validate them
+        $cminlist = in_array($cm->id, explode(",", $course->activitiessection));
+        $useristarget = array_key_exists('folio', $USER->profile) && (int)$USER->profile['folio'] > 0 &&
+            (int)$USER->profile['folio'] % 2 == 0;
+
+        return  $cminlist && $useristarget;
     }
 }
