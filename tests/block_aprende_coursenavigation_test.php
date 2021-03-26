@@ -78,7 +78,7 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
      */
     public function test_block_instance_text_prop_non_empty(): void {
         // Setup a block
-        $record = $this->new_block_record($this->page);
+        $record = $this->create_block_record($this->page);
         $block = block_instance($this->blockname, $record, $this->page);
 
         $this->assertInstanceOf(\block_base::class, $block);
@@ -92,7 +92,7 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
      * Utility method to create block record
      * TODO: Refactor this method into a plugin instance generator
      */
-    protected function new_block_record(\moodle_page $page): \stdClass {
+    protected function create_block_record(\moodle_page $page): \stdClass {
         global $DB;
 
         $blockrecord = new \stdClass;
