@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Course module navigation block main controller
- * @package         block_course_modulenavigation
+ * Course navigation block main controller
+ * @package         block_aprende_coursenavigation
  * @copyright       2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author          Sylvain Revneu | Jordan Kesraoui | Pimenko
  * @license         http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace block_course_modulenavigation\privacy;
+namespace block_aprende_coursenavigation\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
 use core_privacy\local\metadata\null_provider;
 
 /**
- * Privacy Subsystem for block_course_modulenavigation implementing null_provider.
+ * Privacy Subsystem for block_aprende_coursenavigation implementing null_provider.
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

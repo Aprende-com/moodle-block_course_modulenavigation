@@ -15,16 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Course module navigation version.
- * @package    block_course_modulenavigation
+ * Course navigation version.
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_course_modulenavigation';
-$plugin->release   = '4.1';
-$plugin->version   = 2020061615;
+$plugin->component = 'block_aprende_coursenavigation';
+$plugin->version   = 2021031516;
 $plugin->requires  = 2018051700; // Moodle 3.5 and above.
-$plugin->maturity  = MATURITY_STABLE;
+$plugin->maturity  = MATURITY_BETA;
+$plugin->dependencies = [
+    'theme_aprende' => 20200718032,
+    'format_aprendetopics' => 2021030801,
+    'block_aprendeoverview' => 2020081704,
+];

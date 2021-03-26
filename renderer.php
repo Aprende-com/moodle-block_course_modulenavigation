@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Renderer for modulenavigation.
+ * Renderer for course navigation.
  *
- * @package    block_course_modulenavigation
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Define render navigation
+ * Course navigation renderer file
  *
- * @package    block_course_modulenavigation
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_course_modulenavigation_nav_renderer extends plugin_renderer_base {
+class block_aprende_coursenavigation_nav_renderer extends plugin_renderer_base {
 
     /**
      *
@@ -46,12 +46,12 @@ class block_course_modulenavigation_nav_renderer extends plugin_renderer_base {
     public function render_nav($template) {
         if (isset($template->config->onesection) && ($template->config->onesection == 1)) {
             return $this->render_from_template(
-                    'block_course_modulenavigation/coursenav_onesection',
+                    'block_aprende_coursenavigation/coursenav_onesection',
                     $template
             );
         } else {
             return $this->render_from_template(
-                    'block_course_modulenavigation/coursenav',
+                    'block_aprende_coursenavigation/coursenav',
                     $template
             );
         }

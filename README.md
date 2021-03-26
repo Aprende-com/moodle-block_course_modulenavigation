@@ -1,16 +1,20 @@
-# moodle-block_course_modulenavigation
+# moodle-block_aprende_coursenavigation
 
-[![Build Status](https://travis-ci.org/DigiDago/moodle-block_course_modulenavigation/.svg?branch=master)](https://travis-ci.org/DigiDago/moodle-block_course_modulenavigation)
+Note
+====
+This plugin was forked from https://github.com/DigiDago/moodle-course_modulenavigation by http://pimenko.com/
 
 Introduction
 ============
-Course module navigation is a block that show the users a summary (like a table of content) of a course with sections name and a list of all resources and activties (except URL). One objective of this block is to replace classical block navigation in a way to present only the course contents and sections title.
+Aprende Course navigation is a block that show the users a summary (like a table of content) of a course with sections name and a list of all resources and activties (except URL). 
+One objective of this block is to replace classical block navigation in a way to present only the course contents and sections title.
+
 If you click on resources and activites of the menu, you display the page of the resource or activity.
 
-This block use automaticaly names of sections and names of resources and activities. When you use course module navigation, we recommand to use pages to add videos or contents in order to be able to view all resources in the list of the block.
-If you want to display course module navigation on all pages of the course (main, activities, resources), make sure to check permission of the block and display it on "every page".
+This block uses automaticaly names of sections and names of resources and activities. When you use course module navigation, we recommand to use pages to add videos or contents in order to be able to view all resources in the list of the block.
+If you want to display course navigation on all pages of the course (main, activities, resources), make sure to check permission of the block and display it on "every page".
 
-== We add some options. Now you can : ==
+== Some configuration options ==
 
 **Section Names**
 - Option A : Clicking at section name will point to section area or section page (for example if you use a course format as one section by page).
@@ -18,43 +22,46 @@ If you want to display course module navigation on all pages of the course (main
 
 **Labels**
 You can choose if labels are displayed or not in the menu with the option "toggleshowlabels".
+In case you use the following title pattern, the block will present it as a content separator:
+
+    <h1 class=”content-separator”>Label</h1>
+    <h2 class=”content-separator”>Label</h2>
+    <h3 class=”content-separator”>Label</h3>
+    <h4 class=”content-separator”>Label</h4>
+    <h5 class=”content-separator”>Label</h5>
+    <h6 class=”content-separator”>Label</h6>
 
 **Expand/open menu**
 You can chose if menu is always open with the option "togglecollapse"
 
-
-== About activity completion ==
-If activity completion is used in the course, course navigation block display a circle empty or green to show state of completion. 
-
-== Display Type of the menu ==
-This block has an option to display at choice :
-- Only the active section
-- or all the sections 
-
-Maintainer
-============
-Course module navigation was initialy developed by Bas Brand and was based on an request of Digidago (Clément PRUDHOMME). It is currently maintained by DigiDago.
-
+**Show restricted activities**
+If activity completion is used in the course, course navigation block display a proper icon to show state of completion. (Only available for activities)
+If restrictions are used in the course, you can choose if the block should display or not restricted items. (Available for sections and activities).
 
 Installation
 ============
- 1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.  
- 2. Put Moodle in 'Maintenance Mode' (docs.moodle.org/en/admin/setting/maintenancemode) so that there are no 
+ 1. Put Moodle in 'Maintenance Mode' (docs.moodle.org/en/admin/setting/maintenancemode) so that there are no 
     users using it bar you as the administrator - if you have not already done so.
- 3. Copy 'course_modulenavigation' to '/blocks/' if you have not already done so.
- 4. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
+ 2. Copy 'course_modulenavigation' to '/blocks/' if you have not already done so.
+ 3. Login as an administrator and follow standard the 'plugin' update notification.  If needed, go to
     'Site administration' -> 'Notifications' if this does not happen.
- 5.  Put Moodle out of Maintenance Mode.
+ 4.  Put Moodle out of Maintenance Mode.
 
-Upgrade Instructions
+Some configuration notes
 ====================
- 1. Ensure you have the version of Moodle as stated above in 'Required version of Moodle'.
- 2. Put Moodle in 'Maintenance Mode' so that there are no users using it bar you as the administrator.
- 3. In '/blocks/' move old 'course_modulenavigation' directory to a backup folder outside of Moodle.
- 4. Follow installation instructions above.
- 5. If automatic 'Purge all caches' appears not to work by lack of display etc. then perform a manual 'Purge all caches'
-    under 'Home -> Site administration -> Development -> Purge all caches'.
- 6. Put Moodle out of Maintenance Mode.
+Once te plugin has been installed correctly:
+1. Ensure the old block(Coursemodule Navigation) was unistalled.
+2. Enable block editing mode from the LMS main admin page.
+3. With block editing mode on, go to the homepage (/index.php?redirect=0) and add a new Course Navigation block.
+4. Review the options on the new added block and choose "Display on any page" The block knows that it should be displayed on course and activity pages.
+5. To manage plugin system options, go to the admin area on the plugins section.
+
+About the main moodle menu (flat navigation)
+====================
+To be able to customize the moodle flat navigation the best option is to use and configure:
+ - https://moodle.org/plugins/local_boostnavigation
+2. Once installed and configured, you will be able to choose the nodes that will be shown on the menu, and create custom ones with several rules based on roles, contexts, and user data, even it is possible to manege the menu icons.
+3. For more info have a read on: https://github.com/moodleuulm/moodle-local_boostnavigation/blob/master/README.md
 
 Uninstallation
 ==============
@@ -66,27 +73,14 @@ Uninstallation
 
 Version Information
 ===================
-See Changes.md.
-
-
-Any Problems, questions, suggestions
-===================
-If you have a problem with this block, suggestions for improvement, drop an email at :
-- Clément PRUDHOMME :  contact@Pimenko.com
-- Github : https://github.com/DigiDago/moodle-course_modulenavigation
+See changelog.md
 
 
 Languages and translation
 ===================
-English and french versions included / versions anglaise et française incluses.
-
-
-Customization
-===================
-You can easily use .css to customize style of the bloc course module navigation.
-
+English and spanish versions included / versiones en inglés y español.
 
 
 Us
 ==
-@copyright 2018 Pimenko http://pimenko.com/
+@copyright 2021 Aprende Institute. https://aprende.com

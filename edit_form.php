@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Edit form for module navigation.
- * @package    block_course_modulenavigation
+ * Edit form for course navigation.
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Define the edit form for block course modulenavigation.
- * @package         block_course_modulenavigation
+ * Define the edit form for block course navigation.
+ * @package         block_aprende_coursenavigation
  * @copyright       2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author          Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license         http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_course_modulenavigation_edit_form extends block_edit_form {
+class block_aprende_coursenavigation_edit_form extends block_edit_form {
 
     /**
      * Defines fields to add to the settings form.
@@ -56,7 +56,7 @@ class block_course_modulenavigation_edit_form extends block_edit_form {
             'config_blocktitle',
             get_string(
                 'config_blocktitle',
-                'block_course_modulenavigation'
+                'block_aprende_coursenavigation'
             )
         );
         $mform->setDefault(
@@ -71,7 +71,7 @@ class block_course_modulenavigation_edit_form extends block_edit_form {
         $mform->addHelpButton(
             'config_blocktitle',
             'config_blocktitle',
-            'block_course_modulenavigation'
+            'block_aprende_coursenavigation'
         );
 
         $mform->addElement(
@@ -79,11 +79,11 @@ class block_course_modulenavigation_edit_form extends block_edit_form {
             'config_onesection',
             get_string(
                 'config_onesection',
-                'block_course_modulenavigation'
+                'block_aprende_coursenavigation'
             ),
             get_string(
                 'config_onesection_label',
-                'block_course_modulenavigation'
+                'block_aprende_coursenavigation'
             )
         );
         $mform->setDefault(

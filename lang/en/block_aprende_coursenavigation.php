@@ -16,7 +16,7 @@
 
 /**
  * Defines the block strings.
- * @package    block_course_modulenavigation
+ * @package    block_aprende_coursenavigation
  * @copyright  2019 Pimenko <contact@pimenko.com> <pimenko.com>
  * @author     Sylvain Revenu | Nick Papoutsis | Bas Brands | Pimenko
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['config_blocktitle']                   = 'Block title';
-$string['config_blocktitle_default']           = 'Table of contents';
+$string['config_blocktitle_default']           = 'Course Navigation';
 $string['config_blocktitle_help']              = 'Leave this field empty to use the default block title. If you define a title here, it will be used instead of the default one.';
 $string['config_onesection']                   = 'Show the current section only';
 $string['config_onesection_label']             = 'If enabled show one section only. If disabled show an accordion style menu';
 $string['course_modulenavigation:addinstance'] = 'Add a new course contents block';
 $string['notusingsections']                    = 'This course format does not use sections.';
-$string['pluginname']                          = 'Course Module Navigation';
+$string['pluginname']                          = 'Course Navigation';
 $string['toggleclickontitle']                  = 'Clicking on the title';
 $string['toggleclickontitle_desc']             = "'Displays the menu' or 'Goes to that page'.";
 $string['toggleclickontitle_menu']             = 'Displays the menu';
@@ -42,4 +42,12 @@ $string['togglecollapse']                      = 'Collapse tabs';
 $string['togglecollapse_desc']                 = 'Choose whether to display all tabs not collapsed';
 $string['toggletitles']                        = 'Show only titles';
 $string['toggletitles_desc']                   = 'Choose whether to display only titles or titles and content';
-$string['privacy:null_reason']                 = 'The Blog Course Module Navigation block only shows data stored in other locations';
+$string['privacy:null_reason']                 = 'The Aprende Course Navigation block only shows data stored in other locations';
+
+// Post fork
+$string['toggleshowrestricted']                = 'Show restricted';
+$string['toggleshowrestricted_desc']           = 'Choose whether to display restricted course modules or not';
+$string['completion-n']                        = 'Incomplete';
+$string['completion-y']                        = 'Completed';
+$string['optional']                            = 'Optional';
+$string['optionalmsg']                         = 'This item is not neccesary to graduate, but we encourage you to complete it';
