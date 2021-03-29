@@ -29,7 +29,7 @@ jobs:
           git submodule foreach git checkout master
           git submodule foreach git pull origin master
           git clone git@github.com:Aprende-com/devops.git /tmp/devops-$DATE
-          cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          sudo cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cd /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           rsync -av --progress ./* ./moodle --exclude moodle
           sudo cp /tmp/devops-$DATE/dockerfiles/Dockerfile /home/ubuntu/_work/$PLUGIN/$PLUGIN/
@@ -54,12 +54,12 @@ jobs:
           sudo docker run -d unit-test-$DATE
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
           sudo docker exec  $CONTAINER php /var/www/moodle/admin/tool/phpunit/cli/init.php
-          cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
+          sudo cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
           PATHS=$(grep path /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
-          for i in $PATHS;do   sed -i '/ <testsuite name="aprende_phpunit_testsuite">/a  \ \ \ \ \ \ \ \ \ \   <directory suffix="_test.php">'$i'/tests</directory>'  phpunit.xml;done
-          for i in $PATHS;do   sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
+          for i in $PATHS;do  sudo sed -i '/ <testsuite name="aprende_phpunit_testsuite">/a  \ \ \ \ \ \ \ \ \ \   <directory suffix="_test.php">'$i'/tests</directory>'  phpunit.xml;done
+          for i in $PATHS;do  sudo sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
           pwd
-          cat phpunit.xml
+          sudo cat phpunit.xml
           sudo docker cp /home/ubuntu/tools/coverage/install_composer.sh $CONTAINER:/tmp
           sudo docker exec $CONTAINER  chmod 777 /tmp/install_composer.sh
           sudo docker exec $CONTAINER rm -f /var/www/moodle/phpunit.xml
