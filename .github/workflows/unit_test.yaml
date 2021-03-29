@@ -4,7 +4,7 @@ on:
     types: [opened]
     branches: master
 jobs:
-  unit_tests:
+  build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: self-hosted
     steps:
@@ -16,19 +16,30 @@ jobs:
         with:
           ref: '${{ github.head_ref }}'
       - name: get current image and run unit tests
-        #continue-on-error: true
+        continue-on-error: true
         run: |
           DATE=`date '+%Y%m%d%H%M%S'` 
           PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
           PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
-          IMAGE=$(kubectl describe deployment moodle -n qa| grep Image | awk '{print $2}') 
+          #IMAGE=249553882629.dkr.ecr.us-east-1.amazonaws.com/aprende-moodle-qa:moodle-qa-3.10.1-20210323193704
+          #IMAGE=$(kubectl describe deployment moodle -n qa| grep Image | awk '{print $2}') 
+          sudo chown -R ubuntu:ubuntu  /usr/local/moodle
+          cd /usr/local/moodle
+          git submodule update --init --recursive .
+          git submodule foreach git checkout master
+          git submodule foreach git pull origin master
+          git clone git@github.com:Aprende-com/devops.git /tmp/devops-$DATE
+          cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cd /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          cp /home/ubuntu/tools/coverage/php.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          cp /home/ubuntu/tools/coverage/20-xdebug.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          aws s3 cp s3://aprende-configs/configqa.php /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          sudo echo "FROM $IMAGE" > /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile 
-          sudo echo "RUN rm -rf /var/www/moodle/$PLUGINPATH/*" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
-          sudo echo "COPY  . /var/www/moodle/$PLUGINPATH/" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
+          rsync -av --progress ./* ./moodle --exclude moodle
+          sudo cp /tmp/devops-$DATE/dockerfiles/Dockerfile /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          sudo chmod 777 /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
+          sudo cp /home/ubuntu/tools/coverage/php.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          sudo cp /home/ubuntu/tools/coverage/20-xdebug.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          sudo aws s3 cp s3://aprende-configs/configqa.php /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          #sudo echo "FROM $IMAGE" > /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile 
+          #sudo echo "RUN rm -rf /var/www/moodle/$PLUGINPATH/*" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
+          sudo echo "COPY  ./moodle /var/www/moodle" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "COPY  ./configqa.php /var/www/moodle/config.php" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "COPY  ./20-xdebug.ini /usr/local/etc/php/conf.d/20-xdebug.ini" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "RUN chmod 755 /var/www/moodle/$PLUGINPATH" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile 
@@ -63,7 +74,7 @@ jobs:
           sudo rm -rf $MONTH
           sudo docker cp $CONTAINER:/var/www/moodle/coverage-html-output/ /var/www/reports/coverage-reports/2021/$MONTH
       - name: clean up
-        if: always()
+        #if: always()
         run: |
           sudo docker kill $(sudo docker ps -q) 
           sudo docker rm $(sudo docker ps -a -q)      
