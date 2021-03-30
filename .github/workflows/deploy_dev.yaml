@@ -9,7 +9,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: clean up previous
-        run: sudo rm -rf /tmp/moodle
+        run: sudo rm -rf /tmp/moodle && sudo rm -rf /home/ubuntu/_work/moodle*
       - name: connect to dev server
         run: aws eks --region us-east-1 update-kubeconfig --name aprende-dev
       - name: login to ECR
