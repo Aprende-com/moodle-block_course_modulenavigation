@@ -39,6 +39,18 @@ jobs:
           sudo rm -rf /tmp/moodle/$PLUGINPATH/* 
           sudo cp -rf /home/ubuntu/_work/$PLUGIN/$PLUGIN/* /tmp/moodle/$PLUGINPATH/
           sudo chmod -R 755 /tmp/moodle
+      - name: generate JS
+        run: |
+         cd /tmp/moodle
+         export NVM_DIR="$HOME/.nvm"
+         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+         sudo chmod -R 777 /tmp/moodle
+         nvm install 14.15
+         npm install
+         npm rebuild node-sass
+         grunt --force
+         sudo chmod -R 755 /tmp/moodle
       - name: build, push and deploy image
         run:  |
           DATE=`date '+%Y%m%d%H%M%S'` 
@@ -136,4 +148,3 @@ jobs:
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL_QA }}" \
           --header "Content-Type: application/json" \
           --data "{\"text\": \"${MESSAGE}\"}"
-
