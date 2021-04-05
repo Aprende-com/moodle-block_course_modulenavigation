@@ -1,4 +1,4 @@
-name: Coverage Unit Tests 
+name: Run PHPUnit tests and coverage report
 on:
   pull_request:
     types: [opened]

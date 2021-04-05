@@ -1,4 +1,4 @@
-name: Update submodules 
+name: Update moodle core submodules to master.
 on:
   push:
     branches: master

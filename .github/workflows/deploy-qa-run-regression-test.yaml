@@ -1,4 +1,4 @@
-name: QA Pipeline
+name: Deploy to QA and run regression test
 on:
   push:
     branches:
