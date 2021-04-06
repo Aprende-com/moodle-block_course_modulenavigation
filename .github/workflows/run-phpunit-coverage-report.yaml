@@ -55,7 +55,7 @@ jobs:
           sudo docker build -t unit-test-$DATE .
           sudo docker run -d unit-test-$DATE
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
-          #sudo docker exec  $CONTAINER php /var/www/moodle/admin/tool/phpunit/cli/init.php
+          sudo docker exec  $CONTAINER /usr/local/bin/php  /var/www/moodle/admin/tool/phpunit/cli/init.php
           echo "container is $CONTAINER"
           echo "generating phpunit.xml"
           sudo cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
