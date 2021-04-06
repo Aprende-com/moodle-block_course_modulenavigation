@@ -55,7 +55,6 @@ jobs:
           sudo docker build -t unit-test-$DATE .
           sudo docker run -d unit-test-$DATE
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
-          sudo docker exec  $CONTAINER /usr/local/bin/php  /var/www/moodle/admin/tool/phpunit/cli/init.php
           echo "container is $CONTAINER"
           echo "generating phpunit.xml"
           sudo cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
@@ -65,6 +64,8 @@ jobs:
           for i in $PATHS;do   sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
           pwd
           cat phpunit.xml
+          echo "running init"
+          sudo docker exec  $CONTAINER /usr/local/bin/php  /var/www/moodle/admin/tool/phpunit/cli/init.php
           sudo docker cp /home/ubuntu/tools/coverage/install_composer.sh $CONTAINER:/tmp
           sudo docker exec $CONTAINER  chmod 777 /tmp/install_composer.sh
           sudo docker exec $CONTAINER rm -f /var/www/moodle/phpunit.xml
@@ -79,7 +80,7 @@ jobs:
           sudo rm -rf $MONTH
           sudo docker cp $CONTAINER:/var/www/moodle/coverage-html-output/ /var/www/reports/coverage-reports/2021/$MONTH
       - name: clean up
-        if: always()
+        #if: always()
         run: |
           sudo docker kill $(sudo docker ps -q) 
           sudo docker rm $(sudo docker ps -a -q)
