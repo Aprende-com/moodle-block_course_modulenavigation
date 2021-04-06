@@ -22,8 +22,6 @@ jobs:
           DATE=`date '+%Y%m%d%H%M%S'` 
           PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
           PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
-          #IMAGE=249553882629.dkr.ecr.us-east-1.amazonaws.com/aprende-moodle-qa:moodle-qa-3.10.1-20210323193704
-          #IMAGE=$(kubectl describe deployment moodle -n qa| grep Image | awk '{print $2}') 
           sudo chown -R ubuntu:ubuntu  /usr/local/moodle
           sudo chown -R ubuntu:ubuntu  /home/ubuntu/_work
           cd /usr/local/moodle
