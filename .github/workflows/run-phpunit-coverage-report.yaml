@@ -33,7 +33,7 @@ jobs:
           git clone git@github.com:Aprende-com/devops.git /tmp/devops-$DATE
           cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cd /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          rsync -av --progress ./* ./moodle --exclude moodle
+          rsync -av --progress ./* ./moodle/$PLUGINPATH --exclude moodle
           sudo cp /tmp/devops-$DATE/dockerfiles/Dockerfile /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           sudo chmod 777 /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo cp /home/ubuntu/tools/coverage/php.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
