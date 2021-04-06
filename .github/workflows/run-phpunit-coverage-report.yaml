@@ -3,6 +3,7 @@ on:
   pull_request:
     types: [opened]
     branches: master
+  workflow_dispatch:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
@@ -24,15 +25,15 @@ jobs:
           #IMAGE=249553882629.dkr.ecr.us-east-1.amazonaws.com/aprende-moodle-qa:moodle-qa-3.10.1-20210323193704
           #IMAGE=$(kubectl describe deployment moodle -n qa| grep Image | awk '{print $2}') 
           sudo chown -R ubuntu:ubuntu  /usr/local/moodle
+          sudo chown -R ubuntu:ubuntu  /home/ubuntu/_work
           cd /usr/local/moodle
           git submodule update --init --recursive .
           git submodule foreach git checkout master
           git submodule foreach git pull origin master
           git clone git@github.com:Aprende-com/devops.git /tmp/devops-$DATE
-          sudo chown -R ubuntu:ubuntu /home/ubuntu/_work/
-          sudo cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
+          cp -r /usr/local/moodle /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           cd /home/ubuntu/_work/$PLUGIN/$PLUGIN/
-          sudo rsync -av --progress ./* ./moodle --exclude moodle
+          rsync -av --progress ./* ./moodle --exclude moodle
           sudo cp /tmp/devops-$DATE/dockerfiles/Dockerfile /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           sudo chmod 777 /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo cp /home/ubuntu/tools/coverage/php.ini /home/ubuntu/_work/$PLUGIN/$PLUGIN/
@@ -56,13 +57,11 @@ jobs:
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
           sudo docker exec  $CONTAINER php /var/www/moodle/admin/tool/phpunit/cli/init.php
           sudo cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
-          sudo chown -R ubuntu:ubuntu  /home/ubuntu/_work
-          PATHS=$(sudo grep path /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
-          for i in $PATHS;do  sed -i '/ <testsuite name="aprende_phpunit_testsuite">/a  \ \ \ \ \ \ \ \ \ \   <directory suffix="_test.php">'$i'/tests</directory>'  phpunit.xml;done
-          for i in $PATHS;do  sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
-          echo "phpunit.xml file content:"
+          PATHS=$(grep path /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
+          for i in $PATHS;do   sed -i '/ <testsuite name="aprende_phpunit_testsuite">/a  \ \ \ \ \ \ \ \ \ \   <directory suffix="_test.php">'$i'/tests</directory>'  phpunit.xml;done
+          for i in $PATHS;do   sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
           pwd
-          sudo cat phpunit.xml
+          cat phpunit.xml
           sudo docker cp /home/ubuntu/tools/coverage/install_composer.sh $CONTAINER:/tmp
           sudo docker exec $CONTAINER  chmod 777 /tmp/install_composer.sh
           sudo docker exec $CONTAINER rm -f /var/www/moodle/phpunit.xml
@@ -77,7 +76,7 @@ jobs:
           sudo rm -rf $MONTH
           sudo docker cp $CONTAINER:/var/www/moodle/coverage-html-output/ /var/www/reports/coverage-reports/2021/$MONTH
       - name: clean up
-        #if: always()
+        if: always()
         run: |
           sudo docker kill $(sudo docker ps -q) 
-          sudo docker rm $(sudo docker ps -a -q)      
+          sudo docker rm $(sudo docker ps -a -q)
