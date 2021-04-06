@@ -41,7 +41,7 @@ jobs:
           sudo aws s3 cp s3://aprende-configs/configqa.php /home/ubuntu/_work/$PLUGIN/$PLUGIN/
           #sudo echo "FROM $IMAGE" > /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile 
           #sudo echo "RUN rm -rf /var/www/moodle/$PLUGINPATH/*" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
-          sudo echo "COPY  ./moodle /var/www/moodle" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
+          #sudo echo "COPY  ./moodle /var/www/moodle" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "COPY  ./configqa.php /var/www/moodle/config.php" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "COPY  ./20-xdebug.ini /usr/local/etc/php/conf.d/20-xdebug.ini" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile
           sudo echo "RUN chmod 755 /var/www/moodle/$PLUGINPATH" >> /home/ubuntu/_work/$PLUGIN/$PLUGIN/Dockerfile 
@@ -55,8 +55,11 @@ jobs:
           sudo docker build -t unit-test-$DATE .
           sudo docker run -d unit-test-$DATE
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
-          sudo docker exec  $CONTAINER php /var/www/moodle/admin/tool/phpunit/cli/init.php
+          #sudo docker exec  $CONTAINER php /var/www/moodle/admin/tool/phpunit/cli/init.php
+          echo "container is $CONTAINER"
+          echo "generating phpunit.xml"
           sudo cp /home/ubuntu/tools/coverage/phpunit_template.xml  phpunit.xml
+          sudo chmod 777 phpunit.xml
           PATHS=$(grep path /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
           for i in $PATHS;do   sed -i '/ <testsuite name="aprende_phpunit_testsuite">/a  \ \ \ \ \ \ \ \ \ \   <directory suffix="_test.php">'$i'/tests</directory>'  phpunit.xml;done
           for i in $PATHS;do   sed -i '/ <whitelist>/a  \ \ \ \ \ \ \ \ \ \    <directory suffix=".php">'$i'</directory>'  phpunit.xml;done
