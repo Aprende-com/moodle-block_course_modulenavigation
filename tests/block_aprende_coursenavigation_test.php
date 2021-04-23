@@ -78,7 +78,7 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
      */
     public function test_block_instance_text_prop_non_empty(): void {
         // Setup a block
-        $record = $this->new_block_record($this->page);
+        $record = $this->create_block_record($this->page);
         $block = block_instance($this->blockname, $record, $this->page);
 
         $this->assertInstanceOf(\block_base::class, $block);
@@ -89,10 +89,53 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
     }
 
     /**
+     * @testdox Given a specific escenario, should_skip_activity() should return true if all the right settings are in place
+     * @test
+     */
+    public function test_skipping_anactivity(): void {
+        global $USER;
+
+        // Set up default student escenario for a course and an activity
+        $course = $this->getDataGenerator()->create_course(['format' => 'topics']);
+        $quizgen = $this->getDataGenerator()->get_plugin_generator('mod_quiz');
+        $quiz = $quizgen->create_instance(['course' => $course]);
+
+        // Create and enrol a student, set the student as the request's user
+        $user = $this->getDataGenerator()->create_user();
+        $this->getDataGenerator()->enrol_user($user->id, $course->id, 'student');
+        $USER = $user;
+
+        // Setup a block
+        $record = $this->create_block_record($this->page);
+        $block = block_instance($this->blockname, $record, $this->page);
+
+        // Fetch the activity
+        $modinfo = get_fast_modinfo($course);
+        $cm = $modinfo->get_cm($quiz->cmid);
+
+        // Required configurations are not in place
+        $this->assertFalse($block->should_skip_activity($cm, $course), 'It should return false');
+
+        // Provide course format options
+        $course->format = 'aprendetopics';
+        $course->activities_enabled = 1;
+        $course->activitiessection = (string)$cm->id;
+
+        // Provide the required user field
+        $USER->profile = [];
+        $USER->profile['folio'] = "4"; // Even folio id
+
+        // Required configuration are in place
+        $expected = true;
+        $actual = $block->should_skip_activity($cm, $course);
+        $this->assertEquals($expected, $actual, 'Values should be equals');
+    }
+
+    /**
      * Utility method to create block record
      * TODO: Refactor this method into a plugin instance generator
      */
-    protected function new_block_record(\moodle_page $page): \stdClass {
+    protected function create_block_record(\moodle_page $page): \stdClass {
         global $DB;
 
         $blockrecord = new \stdClass;

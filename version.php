@@ -24,6 +24,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_aprende_coursenavigation';
-$plugin->version   = 2021031516;
+$plugin->version = 2021032600;
 $plugin->requires  = 2018051700; // Moodle 3.5 and above.
 $plugin->maturity  = MATURITY_BETA;
+$plugin->dependencies = [
+    'theme_aprende' => 20200718032,
+    'format_aprendetopics' => 2021030801,
+    'block_aprendeoverview' => 2020081704,
+];

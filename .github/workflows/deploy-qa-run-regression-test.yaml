@@ -1,4 +1,4 @@
-name: QA Pipeline
+name: Deploy to QA and run regression test
 on:
   push:
     branches:
@@ -11,7 +11,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: clean up previous
-        run: sudo rm -rf /tmp/moodle
+        run: sudo rm -rf /tmp/moodle 
       - name: connect to qa server
         run: aws eks --region us-east-1 update-kubeconfig --name aprende-dev
       - name: login to ECR
@@ -148,4 +148,3 @@ jobs:
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL_QA }}" \
           --header "Content-Type: application/json" \
           --data "{\"text\": \"${MESSAGE}\"}"
-

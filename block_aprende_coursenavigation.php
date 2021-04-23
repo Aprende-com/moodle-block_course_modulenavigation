@@ -96,16 +96,7 @@ class block_aprende_coursenavigation extends block_base {
             return $this->content;
         }
 
-        $selected = optional_param(
-                'section',
-                null,
-                PARAM_INT
-        );
-        $intab = optional_param(
-                'dtab',
-                null,
-                PARAM_TEXT
-        );
+        [$selected, $intab] = $this->get_page_params();
 
         $this->content = new stdClass();
         $this->content->footer = '';
@@ -129,18 +120,7 @@ class block_aprende_coursenavigation extends block_base {
             return $this->content;
         }
 
-        if (($format instanceof format_digidagotabs) || ($format instanceof format_horizontaltabs)) {
-            // Don't show the menu in a tab.
-            if ($intab) {
-                return $this->content;
-            }
-            // Only show the block inside activities of courses.
-            if ($this->page->pagelayout == 'incourse') {
-                $sections = $format->tabs_get_sections();
-            }
-        } else {
-            $sections = $format->get_sections();
-        }
+        $sections = $format->get_sections();
 
         if (empty($sections)) {
             return $this->content;
@@ -150,12 +130,13 @@ class block_aprende_coursenavigation extends block_base {
 
         $modinfo = get_fast_modinfo($course);
 
-        $template = new stdClass();
+        $templatecontext = new stdClass();
 
         $completioninfo = new completion_info($course);
 
         $continuationclass = '\block_aprendeoverview\course_continuation_info';
 
+        // Get last viewed section
         if (class_exists($continuationclass)) {
             $continfo = new \block_aprendeoverview\course_continuation_info($course, $USER);
             if (
@@ -175,7 +156,7 @@ class block_aprende_coursenavigation extends block_base {
         }
 
         if ($completioninfo->is_enabled()) {
-            $template->coursecompletionon = true;
+            $templatecontext->coursecompletionon = true;
         }
 
         $completionok = [
@@ -242,19 +223,19 @@ class block_aprende_coursenavigation extends block_base {
             }
         }
 
-        $template->inactivity = $inactivity;
+        $templatecontext->inactivity = $inactivity;
 
         if (count($sections) > 1) {
-            $template->hasprevnext = true;
-            $template->hasnext = true;
-            $template->hasprev = true;
+            $templatecontext->hasprevnext = true;
+            $templatecontext->hasnext = true;
+            $templatecontext->hasprev = true;
         }
 
         $courseurl = new moodle_url(
                 '/course/view.php',
                 ['id' => $course->id]
         );
-        $template->courseurl = $courseurl->out();
+        $templatecontext->courseurl = $courseurl->out();
         $sectionnums = [];
         foreach ($sections as $section) {
             $sectionnums[] = $section->section;
@@ -367,16 +348,8 @@ class block_aprende_coursenavigation extends block_base {
                     }
 
                     // Practical activities experiment
-                    if (isset($course->activities_enabled) &&
-                        isset($course->activitiessection ) &&
-                        array_key_exists('folio', $USER->profile)) {
-
-                        if ($course->activities_enabled &&
-                            in_array($modnumber, explode(",", $course->activitiessection)) &&
-                            !$this->page->user_is_editing() &&
-                            $USER->profile['folio'] % 2 === 0) {
-                            continue;
-                        }
+                    if ($this->should_skip_activity($module, $course)) {
+                        continue;
                     }
 
                     if (!$module->visible || !$module->visibleoncoursepage) {
@@ -470,7 +443,7 @@ class block_aprende_coursenavigation extends block_base {
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);
-                $template->sections[] = $thissection;
+                $templatecontext->sections[] = $thissection;
             }
             if ($thissection->selected) {
 
@@ -486,13 +459,13 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $i
                         ]
                 );
-                $template->courseurl = $courseurl->out();
+                $templatecontext->courseurl = $courseurl->out();
 
                 if ($pn->next === false) {
-                    $template->hasnext = false;
+                    $templatecontext->hasnext = false;
                 }
                 if ($pn->prev === false) {
-                    $template->hasprev = false;
+                    $templatecontext->hasprev = false;
                 }
 
                 $prevurl = new moodle_url(
@@ -502,7 +475,7 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $pn->prev
                         ]
                 );
-                $template->prevurl = $prevurl->out(false);
+                $templatecontext->prevurl = $prevurl->out(false);
 
                 $currurl = new moodle_url(
                         '/course/view.php',
@@ -511,7 +484,7 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $thissection->number
                         ]
                 );
-                $template->currurl = $currurl->out(false);
+                $templatecontext->currurl = $currurl->out(false);
 
                 $nexturl = new moodle_url(
                         '/course/view.php',
@@ -520,26 +493,32 @@ class block_aprende_coursenavigation extends block_base {
                                 'section' => $pn->next
                         ]
                 );
-                $template->nexturl = $nexturl->out(false);
+                $templatecontext->nexturl = $nexturl->out(false);
             }
         }
         if ($intab) {
-            $template->inactivity = true;
+            $templatecontext->inactivity = true;
         }
-        $template->coursename = $course->fullname;
+        $templatecontext->coursename = $course->fullname;
         $category = core_course_category::get($course->category, IGNORE_MISSING, true);
 
         if (!is_null($category)) {
-            $template->coursecategory = $category->get_formatted_name();
+            $templatecontext->coursecategory = $category->get_formatted_name();
         }
 
-        $template->config = $this->config;
+        $templatecontext->config = $this->config;
         $renderer = $this->page->get_renderer(
                 'block_aprende_coursenavigation',
                 'nav'
         );
-        $this->content->text = $renderer->render_nav($template);
+
+        $this->templatecontext = $templatecontext;
+        $this->content->text = $renderer->render_nav($templatecontext);
         return $this->content;
+    }
+
+    public function get_template_context() {
+        return $this->templatecontext;
     }
 
     /**
@@ -579,5 +558,42 @@ class block_aprende_coursenavigation extends block_base {
     protected function get_navigation() {
         $this->page->navigation->initialise();
         return clone($this->page->navigation);
+    }
+
+    /**
+     * @return mixed[]
+     * @throws coding_exception
+     */
+    protected function get_page_params() {
+        return array(
+            optional_param('section', null, PARAM_INT),
+            optional_param('dtab', null, PARAM_TEXT)
+        );
+    }
+
+    /**
+     * Returns the true if this activity is part of the ap experiment and should be skipped, false if not
+     * @param $cm cm_info object
+     * @param $course stdClass course object
+     *
+     * @return navigation_node The navigation object to display
+     */
+    public function should_skip_activity(cm_info $cm, stdClass $course): bool {
+        global $USER;
+
+        $settingsdefined = $course->format === 'aprendetopics' &&
+            $course->activities_enabled && !empty($course->activitiessection) &&
+            isset($USER->profile);
+
+        if ($this->page->user_is_editing() || !$settingsdefined) {
+            return false;
+        }
+
+        // The settings are defined, validate them
+        $cminlist = in_array($cm->id, explode(",", $course->activitiessection));
+        $useristarget = array_key_exists('folio', $USER->profile) && (int)$USER->profile['folio'] > 0 &&
+            (int)$USER->profile['folio'] % 2 == 0;
+
+        return  $cminlist && $useristarget;
     }
 }
