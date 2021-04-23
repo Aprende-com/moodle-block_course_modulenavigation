@@ -15,7 +15,7 @@ $default-section-font-size: 18px;
     border-top: 1px solid $dark-gray-border;
     margin: 0 !important;
     & > .card-body {
-        background: $deep-cove;
+        background: $academic-blue !important;
     }
     .course-info {
         padding: 28px 24px;
@@ -43,7 +43,7 @@ $default-section-font-size: 18px;
         }
     }
     .section-group {
-        background: $deep-cove;
+        background: $academic-blue;
     }
     // Collapsed sections
     .section {
