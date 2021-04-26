@@ -5,7 +5,7 @@
   border-top: 1px solid #4d529f;
   margin: 0 !important; }
   .block.block_aprende_coursenavigation > .card-body {
-    background: #0b0e41; }
+    background: #111457; }
   .block.block_aprende_coursenavigation .course-info {
     padding: 28px 24px; }
     .block.block_aprende_coursenavigation .course-info .course-info__title {
@@ -28,7 +28,7 @@
       /* White */
       color: #fff; }
   .block.block_aprende_coursenavigation .section-group {
-    background: #0b0e41; }
+    background: #111457; }
   .block.block_aprende_coursenavigation .section {
     border-bottom: 1px solid #252b65;
     margin: 0;
