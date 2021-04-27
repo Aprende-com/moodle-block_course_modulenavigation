@@ -32,7 +32,3 @@ define(['jquery'], $ => {
         });
     }
 });
-
-
-// Export the module
-// export { init };
