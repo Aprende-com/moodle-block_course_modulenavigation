@@ -24,11 +24,14 @@ define(['jquery'], $ => {
                     if ($collapsibleTarget.classList.contains('show')) {
                         $targetSection.classList.add('current');
                     }
-                    // Resize the special scrollbar for the nav drawer when the drawer's
-                    // contents get bigger or smaller.
-                    $('#nav-drawer').getNiceScroll().resize();
                 }, 500);
             }
+            setTimeout(() => {
+                // Resize the special scrollbar for the nav drawer when the drawer's
+                // contents get bigger or smaller. This is in a separate timeout because
+                // some of the nav drawer sections' animation times are greater than 500 ms.
+                $('#nav-drawer').getNiceScroll().resize();
+            }, 750);
         });
     }
 });
