@@ -1,5 +1,8 @@
 # Changelog
 
+## 05/05/2021
+- Added amplitude events to context / templates.
+
 ## 04/23/2021
 - Change block background color to match footer.
 
