@@ -75,7 +75,7 @@ jobs:
           CONTAINER=$(sudo docker ps | grep unit-test-$DATE | awk '{print $1}'| head -n 2| tail -n1)
           cd /var/www/reports/coverage-reports/2021
           MONTH=`date '+%m'`
-          sudo rm -rf $MONTH
+          #sudo rm -rf $MONTH
           sudo docker cp $CONTAINER:/var/www/moodle/coverage-html-output/ /var/www/reports/coverage-reports/2021/$MONTH
       - name: clean up
         #if: always()
