@@ -66,6 +66,7 @@ $default-section-font-size: 18px;
             margin-left: 0;
             min-width: 30px;
             min-height: 30px;
+            -webkit-appearance: button-bevel;
         }
     }
     > .card-body {
