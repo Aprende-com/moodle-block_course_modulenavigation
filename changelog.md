@@ -3,6 +3,10 @@
 ## 05/05/2021
 - Added amplitude events to context / templates.
 
+## 04/27/2021
+- Automatically resize special scrollbar for left nav drawer when block sections
+  are expanded/collapsed.
+
 ## 04/23/2021
 - Change block background color to match footer.
 
