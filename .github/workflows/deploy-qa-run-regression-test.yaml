@@ -49,6 +49,7 @@ jobs:
          nvm install 14.15
          npm install
          npm rebuild node-sass
+         cd $PLUGINPATH
          grunt --force
          sudo chmod -R 755 /tmp/moodle
       - name: build, push and deploy image
