@@ -41,6 +41,8 @@ jobs:
           sudo chmod -R 755 /tmp/moodle
       - name: generate JS
         run: |
+         PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
+         PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
          cd /tmp/moodle
          export NVM_DIR="$HOME/.nvm"
          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
