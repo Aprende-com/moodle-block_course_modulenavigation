@@ -448,7 +448,7 @@ class block_aprende_coursenavigation extends block_base {
 
                     // Add amplitude data for module.
                     $attrs = (array) $eventattrs;
-                    $attrs['section_name'] = $thissection->sectionlabel;
+                    $attrs['section_name'] = isset($thissection->sectionlabel) ? $thissection->sectionlabel : '';
                     $attrs['activity_name'] = $module->name;
                     $attrs['activity_type'] = $module->modname;
                     $moduleevent = [
@@ -516,7 +516,7 @@ class block_aprende_coursenavigation extends block_base {
 
             // Add amplitude data to section.
             $attrs = (array) $eventattrs;
-            $attrs['section_name'] = $thissection->sectionlabel;
+            $attrs['section_name'] = isset($thissection->sectionlabel) ? $thissection->sectionlabel : '';
             $sectionevent = [
                 'tag' => 'navigation - view section details',
                 'event_attrs' => $attrs,
