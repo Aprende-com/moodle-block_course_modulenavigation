@@ -37,6 +37,21 @@ jobs:
           sudo rm -rf /tmp/moodle/$PLUGINPATH/* 
           sudo cp -rf /home/ubuntu/_work/$PLUGIN/$PLUGIN/* /tmp/moodle/$PLUGINPATH/
           sudo chmod -R 755 /tmp/moodle
+      - name: generate JS
+        run: |
+          PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
+          PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
+          cd /tmp/moodle
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+          sudo chmod -R 777 /tmp/moodle
+          nvm install 14.15
+          npm install
+          npm rebuild node-sass
+          cd $PLUGINPATH
+          grunt --force
+          sudo chmod -R 755 /tmp/moodle
       - name: build, push and deploy image
         run:  |
           DATE=`date '+%Y%m%d%H%M%S'` 
@@ -53,7 +68,6 @@ jobs:
           POD=$(kubectl -n dev get pod | grep moodle | grep Running |awk  '{print $1}') 
           kubectl -n dev exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/purge_caches.php          
           kubectl -n dev exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/upgrade.php --non-interactive
-          kubectl -n dev exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/purge_caches.php          
       - name: The job has failed
         if: ${{ failure() }}
         run: |
@@ -72,5 +86,5 @@ jobs:
           status: ${{ job.status }}
           fields: repo,message,commit,author,took,action,branch,job,workflow # selectable (default: repo,message)
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} ## required
         if: always() # Pick up events even if the job fails or is canceled.

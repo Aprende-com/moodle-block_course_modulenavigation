@@ -41,6 +41,8 @@ jobs:
           sudo chmod -R 755 /tmp/moodle
       - name: generate JS
         run: |
+         PLUGIN=$(echo ${{ github.repository }}| sed  's@.*/@@')
+         PLUGINPATH=$(grep $PLUGIN /usr/local/moodle/.gitmodules  -B2 | grep path |awk '{print $3}')
          cd /tmp/moodle
          export NVM_DIR="$HOME/.nvm"
          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
@@ -49,6 +51,7 @@ jobs:
          nvm install 14.15
          npm install
          npm rebuild node-sass
+         cd $PLUGINPATH
          grunt --force
          sudo chmod -R 755 /tmp/moodle
       - name: build, push and deploy image
@@ -67,7 +70,6 @@ jobs:
           POD=$(kubectl -n qa get pod | grep moodle | grep Running | awk  '{print $1}') 
           kubectl -n qa exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/purge_caches.php          
           kubectl -n qa exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/upgrade.php --non-interactive
-          kubectl -n qa exec --stdin   $POD -- /usr/local/bin/php  /var/www/moodle/admin/cli/purge_caches.php          
       - name: The job has failed
         if: ${{ failure() }}
         run: |

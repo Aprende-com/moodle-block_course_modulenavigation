@@ -240,6 +240,12 @@ class block_aprende_coursenavigation extends block_base {
         foreach ($sections as $section) {
             $sectionnums[] = $section->section;
         }
+
+        // Get base amplitude data.
+        $eventattrs = [];
+        if(class_exists('\theme_aprende\amplitude')){
+            $eventattrs = (\theme_aprende\amplitude::getInstance())->event_attrs;
+        }
         foreach ($sections as $section) {
             $i = $section->section;
 
@@ -440,10 +446,22 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->currentinpage = true;
                     }
 
+                    // Add amplitude data for module.
+                    $attrs = (array) $eventattrs;
+                    $attrs['section_name'] = isset($thissection->sectionlabel) ? $thissection->sectionlabel : '';
+                    $attrs['activity_name'] = $module->name;
+                    $attrs['activity_type'] = $module->modname;
+                    $moduleevent = [
+                        'tag' => 'navigation - select activity',
+                        'event_attrs' => $attrs,
+                    ];
+                    $thismod->module_amp_json = json_encode($moduleevent);
+
                     $thissection->modules[] = $thismod;
                 }
                 $thissection->hasmodules = (count($thissection->modules) > 0);
                 $templatecontext->sections[] = $thissection;
+
             }
             if ($thissection->selected) {
 
@@ -495,6 +513,16 @@ class block_aprende_coursenavigation extends block_base {
                 );
                 $templatecontext->nexturl = $nexturl->out(false);
             }
+
+            // Add amplitude data to section.
+            $attrs = (array) $eventattrs;
+            $attrs['section_name'] = isset($thissection->sectionlabel) ? $thissection->sectionlabel : '';
+            $sectionevent = [
+                'tag' => 'navigation - view section details',
+                'event_attrs' => $attrs,
+            ];
+            $thissection->section_amp_json = json_encode($sectionevent);
+
         }
         if ($intab) {
             $templatecontext->inactivity = true;
