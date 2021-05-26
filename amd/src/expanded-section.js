@@ -9,6 +9,7 @@ define(['jquery'], $ => {
     };
 
     function registerEventListeners(selector) {
+        $('li.current').closest('.section-collapse').addClass('show');
         const $toggler = document.querySelector(selector);
         $toggler.addEventListener('click', event => {
             if (event.target.dataset.toggle === 'collapse' && event.target.closest('.section-title__link')) {
