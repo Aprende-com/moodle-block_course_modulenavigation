@@ -1,5 +1,8 @@
 # Changelog
 
+## 05/26/2021
+- fix: Left hand menu section open up automatically according the activity the user is in
+
 ## 05/05/2021
 - Added amplitude events to context / templates.
 
