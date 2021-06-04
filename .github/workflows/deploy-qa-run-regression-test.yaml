@@ -20,7 +20,7 @@ jobs:
         with:
           ref: 'qa' 
       - name: get current image
-        run: IMAGE=$(kubectl -n qa describe deployment moodle | grep Image | awk '{print $2}') && sudo docker run -d $IMAGE  --entrypoint=/bin/bash
+        run: IMAGE=$(kubectl -n qa describe deployment moodle | grep Image | awk '{print $2}') && sudo docker run --entrypoint=/bin/bash -d "${IMAGE}"  
       - name: copy files
         run: |
           CONTAINER=$(sudo docker ps | awk '{print $1}'| head -n 2| tail -n1) 
