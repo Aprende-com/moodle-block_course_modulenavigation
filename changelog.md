@@ -1,5 +1,8 @@
 # Changelog
 
+## 06/07/2021
+- fix: missing compiled JS files added
+
 ## 05/26/2021
 - fix: Left hand menu section open up automatically according the activity the user is in
 
