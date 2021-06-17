@@ -1,0 +1,31 @@
+---
+
+name: "Single Plugin Pipeline Dispatch"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  single_plugin_pipeline_dispatch:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get branch name"
+        run: |
+          APRENDE_ENV="${{ github.ref }}"
+          APRENDE_ENV="${APRENDE_ENV##*/}"
+          echo "APRENDE_ENV=${APRENDE_ENV}" | tee -a "${GITHUB_ENV}"
+
+      - name: "Single Plugin Pipeline Dispatch"
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: Aprende-com/devops
+          event-type: "single-plugin-pipeline-${{ env.APRENDE_ENV }}"
+          client-payload: |
+            {
+              "repository": "${{ github.repository }}",
+              "ref": "${{ github.ref }}"
+            }
