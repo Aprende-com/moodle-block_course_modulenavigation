@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - master
+      - dev
+      - qa
+      - stg
 
 jobs:
   single_plugin_pipeline_dispatch:
@@ -14,18 +17,23 @@ jobs:
     steps:
       - name: "Get branch name"
         run: |
-          APRENDE_ENV="${{ github.ref }}"
-          APRENDE_ENV="${APRENDE_ENV##*/}"
-          echo "APRENDE_ENV=${APRENDE_ENV}" | tee -a "${GITHUB_ENV}"
+          K8S_NAMESPACE="${{ github.ref }}"
+          K8S_NAMESPACE="${K8S_NAMESPACE##*/}"
+          echo "K8S_NAMESPACE=${K8S_NAMESPACE}" | tee -a "${GITHUB_ENV}"
 
       - name: "Single Plugin Pipeline Dispatch"
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repository: Aprende-com/devops
-          event-type: "single-plugin-pipeline-${{ env.APRENDE_ENV }}"
+          event-type: "single-plugin-pipeline-${{ env.K8S_NAMESPACE }}"
           client-payload: |
             {
               "repository": "${{ github.repository }}",
-              "ref": "${{ github.ref }}"
+              "ref": "${{ github.ref }}",
+              "sha": "${{ github.sha }}",
+              "workflow": "${{ github.workflow }}",
+              "run_id": "${{ github.run_id }}",
+              "run_number": "${{ github.run_number }}",
+              "actor": "${{ github.actor }}"
             }
