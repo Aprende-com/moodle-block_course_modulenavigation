@@ -620,8 +620,7 @@ class block_aprende_coursenavigation extends block_base {
         // The settings are defined, validate them
         $cminlist = in_array($cm->id, explode(",", $course->activitiessection));
         $useristarget = array_key_exists('folio', $USER->profile) && (int)$USER->profile['folio'] > 0 &&
-            (int)$USER->profile['folio'] % 2 == 0;
-
+            (int)$USER->profile['folio'] % 2 == 0 && get_config('format_aprendetopics', 'enable_activities_ab_test') == 1;
         return  $cminlist && $useristarget;
     }
 }

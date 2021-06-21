@@ -1,5 +1,13 @@
 # Changelog
-  
+
+## 06/21/2021
+- fix: AP tab enabled for everyone when the A/B experiment is off
+## 06/07/2021
+- fix: missing compiled JS files added
+
+## 05/26/2021
+- fix: Left hand menu section open up automatically according the activity the user is in
+
 ## 05/05/2021
 - feat: Added amplitude events to context / templates.
 
