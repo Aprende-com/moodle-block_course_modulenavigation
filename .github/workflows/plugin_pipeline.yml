@@ -38,7 +38,7 @@ jobs:
               "ref": "${{ github.ref }}",
               "sha": "${{ github.sha }}",
               "workflow": "${{ github.workflow }}",
-              "head_commit_message": "${{ env.K8S_NAMESPACE }}",
+              "head_commit_message": "${{ env.HEAD_COMMIT_MESSAGE }}",
               "run_id": "${{ github.run_id }}",
               "run_number": "${{ github.run_number }}",
               "actor": "${{ github.actor }}"
