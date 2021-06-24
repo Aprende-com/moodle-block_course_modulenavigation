@@ -11,7 +11,7 @@ on:
 
 jobs:
   single_plugin_pipeline_dispatch:
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     steps:
       - name: "Prepare environment"
@@ -19,13 +19,20 @@ jobs:
           # Generate VARIABLES
           K8S_NAMESPACE="${{ github.ref }}"
           K8S_NAMESPACE="${K8S_NAMESPACE##*/}"
-          HEAD_COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}" | tr -ds "\n" " ")
+          HEAD_COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}")
           SHA_SHORT=$(echo "${{ github.sha }}" | cut -c1-8)
+
+          if [[ "${{ github.event.head_commit.message }}" == LMSDEV-* ]]; then
+            ISSUE_ID=$(echo "${{ github.event.head_commit.message }}" \
+                        | head -1 | awk '{print $1}')
+          fi
 
           # Save them to ENV
           echo "K8S_NAMESPACE=${K8S_NAMESPACE}" | tee -a "${GITHUB_ENV}"
           echo "HEAD_COMMIT_MESSAGE=${HEAD_COMMIT_MESSAGE}" | tee -a "${GITHUB_ENV}"
           echo "SHA_SHORT=${SHA_SHORT}" | tee -a "${GITHUB_ENV}"
+          echo "ISSUE_ID=${ISSUE_ID}" | tee -a "${GITHUB_ENV}"
+
 
       - name: "Single Plugin Pipeline Dispatch"
         uses: peter-evans/repository-dispatch@v1.1.3
@@ -41,6 +48,7 @@ jobs:
               "sha_short": "${{ env.SHA_SHORT }}",
               "workflow": "${{ github.workflow }}",
               "head_commit_message": "${{ env.HEAD_COMMIT_MESSAGE }}",
+              "issue_id": "${{ env.ISSUE_ID }}",
               "run_id": "${{ github.run_id }}",
               "run_number": "${{ github.run_number }}",
               "actor": "${{ github.actor }}"
