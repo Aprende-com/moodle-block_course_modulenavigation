@@ -24,7 +24,7 @@ jobs:
           SHA_SHORT=$(echo "${{ github.sha }}" | cut -c1-8)
 
           for word in ${HEAD_COMMIT_MESSAGE}; do
-            if [ "${word}" == LMSDEV-* ]]; then
+            if [[ "${word}" == LMSDEV-* ]]; then
               ISSUE_ID=$(echo "${{ github.event.head_commit.message }}" \
                         | head -1 | awk '{print $1}')
               break
