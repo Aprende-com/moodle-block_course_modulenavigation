@@ -19,13 +19,17 @@ jobs:
           # Generate VARIABLES
           K8S_NAMESPACE="${{ github.ref }}"
           K8S_NAMESPACE="${K8S_NAMESPACE##*/}"
-          HEAD_COMMIT_MESSAGE=$(echo "${{ github.event.head_commit.message }}")
+          HEAD_COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          HEAD_COMMIT_MESSAGE=$(echo ${HEAD_COMMIT_MESSAGE})  # Remove newlines
           SHA_SHORT=$(echo "${{ github.sha }}" | cut -c1-8)
 
-          if [[ "${{ github.event.head_commit.message }}" == LMSDEV-* ]]; then
-            ISSUE_ID=$(echo "${{ github.event.head_commit.message }}" \
+          for word in ${HEAD_COMMIT_MESSAGE}; do
+            if [ "${word}" == LMSDEV-* ]]; then
+              ISSUE_ID=$(echo "${{ github.event.head_commit.message }}" \
                         | head -1 | awk '{print $1}')
-          fi
+              break
+            fi
+          done
 
           # Save them to ENV
           echo "K8S_NAMESPACE=${K8S_NAMESPACE}" | tee -a "${GITHUB_ENV}"
