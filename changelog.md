@@ -1,5 +1,8 @@
 # Changelog
 
+## 07/19/2021
+- fix: change logic for automatic expansion in microcourses
+
 ## 06/21/2021
 - fix: AP tab enabled for everyone when the A/B experiment is off
 ## 06/07/2021

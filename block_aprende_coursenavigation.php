@@ -442,8 +442,12 @@ class block_aprende_coursenavigation extends block_base {
                         $thismod->completedfail = true;
                     }
 
+                    // Automatically expand this mod's section on all courses using clases magistrales format.
+                    $thismod->sectionexpanded = $this->course_is_microcourse();
+                    
                     if (isset($PAGE->cm->url) && $module->url === $PAGE->cm->url) {
                         $thismod->currentinpage = true;
+                        $thismod->sectionexpanded = true;
                     }
 
                     // Add amplitude data for module.
@@ -622,5 +626,21 @@ class block_aprende_coursenavigation extends block_base {
         $useristarget = array_key_exists('folio', $USER->profile) && (int)$USER->profile['folio'] > 0 &&
             (int)$USER->profile['folio'] % 2 == 0 && get_config('format_aprendetopics', 'enable_activities_ab_test') == 1;
         return  $cminlist && $useristarget;
+    }
+
+    /**
+     * Simple utility function to determine if the current course
+     * is in the microcourse format.
+     * 
+     * @return bool
+     */
+    public function course_is_microcourse() {
+        global $PAGE;
+
+        if ($PAGE->course->format == 'microcourse') {
+            return true;
+        }
+
+        return false;
     }
 }

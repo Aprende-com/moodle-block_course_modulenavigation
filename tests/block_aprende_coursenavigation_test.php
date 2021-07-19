@@ -16,6 +16,8 @@
 
 namespace block_aprende_coursenavigation\tests;
 
+use block_aprende_coursenavigation;
+
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -77,6 +79,20 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
      * @test
      */
     public function test_block_instance_text_prop_non_empty(): void {
+        global $USER, $PAGE;
+
+        $PAGE->set_url(new \moodle_url('/my'));
+
+        $user = $this->getDataGenerator()->create_user();
+        $this->setUser($user);
+
+        // Set some necessary Amplitude settings for block creation.
+        $this->apikey = set_config('amplitudeapikey', 'TESTAPIKEY999', 'theme_aprende');
+        $this->config = set_config('amplitude_config', true, 'theme_aprende');
+        $this->enabled = set_config('amplitude_enable', 1, 'theme_aprende');
+
+        $USER->profile['folio'] = "4"; // Even folio id
+
         // Setup a block
         $record = $this->create_block_record($this->page);
         $block = block_instance($this->blockname, $record, $this->page);
@@ -94,6 +110,9 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
      */
     public function test_skipping_anactivity(): void {
         global $USER;
+        
+        // Set necessary configuration
+        set_config('enable_activities_ab_test', true, 'format_aprendetopics');
 
         // Set up default student escenario for a course and an activity
         $course = $this->getDataGenerator()->create_course(['format' => 'topics']);
@@ -129,6 +148,18 @@ class block_aprende_coursenavigation_testcase extends \advanced_testcase {
         $expected = true;
         $actual = $block->should_skip_activity($cm, $course);
         $this->assertEquals($expected, $actual, 'Values should be equals');
+    }
+
+    public function test_get_content_automatically_expands_the_section_for_clases_magistrales() {
+        global $PAGE;
+
+        $this->course->format = 'microcourse';
+
+        $PAGE->set_course($this->course);
+
+        $block = new block_aprende_coursenavigation();
+
+        $this->assertTrue($block->course_is_microcourse());
     }
 
     /**
