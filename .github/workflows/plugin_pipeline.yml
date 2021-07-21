@@ -28,7 +28,8 @@ jobs:
           echo "K8S_NAMESPACE=${K8S_NAMESPACE}" | tee -a "${GITHUB_ENV}"
           echo "HEAD_COMMIT_MESSAGE=\"${HEAD_COMMIT_MESSAGE}\"" | tee -a "${GITHUB_ENV}"
           echo "SHA_SHORT=${SHA_SHORT}" | tee -a "${GITHUB_ENV}"
-          echo "ISSUE_ID=${ISSUE_ID}" | tee -a "${GITHUB_ENV}"
+          [ -n "${ISSUE_ID}" ] && \
+            echo "ISSUE_ID=${ISSUE_ID}" | tee -a "${GITHUB_ENV}"
 
 
       - name: "Single Plugin Pipeline Dispatch"
