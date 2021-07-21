@@ -29,9 +29,11 @@ jobs:
           echo "K8S_NAMESPACE=${K8S_NAMESPACE}" | tee -a "${GITHUB_ENV}"
           echo "HEAD_COMMIT_MESSAGE=\"${HEAD_COMMIT_MESSAGE}\"" | tee -a "${GITHUB_ENV}"
           echo "SHA_SHORT=${SHA_SHORT}" | tee -a "${GITHUB_ENV}"
-          [ -n "${ISSUE_ID}" ] && \
-            echo "ISSUE_ID=${ISSUE_ID}" | tee -a "${GITHUB_ENV}"
 
+          if [ -n "${ISSUE_ID}" ]; then
+            echo "Found ISSUE_ID in github.event.head_commit.message!"
+            echo "ISSUE_ID=${ISSUE_ID}" | tee -a "${GITHUB_ENV}"
+          fi
 
       - name: "Single Plugin Pipeline Dispatch"
         uses: peter-evans/repository-dispatch@v1.1.3
